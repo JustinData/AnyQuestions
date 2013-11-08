@@ -4,9 +4,8 @@ project2
 GA WDI Project Number 2 - Team inGenius, App TBA
 
 
-###Team Members
-* Aby Bandoh
-* Erica Obersi
-* Justin Kemmerer
-* Nichol Alexander
-* 
+###Team Members / Githubs
+* [Aby Bandoh](http://github.com/abzilla)
+* [Erica Obersi](http://github.com/evobersi)
+* [Justin Kemmerer](https://github.com/JustinGA)
+* [Nichol Alexander](http://github.com/nicholalexander)
