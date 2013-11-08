@@ -20,31 +20,39 @@ WOAH! is a simple classroom tool to keep a real time tally of subjects and conce
 4. Industry Positioning - Aby
 
 ##Technologies
-* websockets
+* AJAX
+* JSON
 * jquery 
 * javascript
 * rails
+* websockets (if there is time)
 
 ##Gems
 * devise
 * thumbs_up
+* foreigner
 
 ##Api's
-* Twitter
+* Twitter (maybe)
 * Pusher
 
-##User Models - DRAFT
-###Student
+##Models
+###Users
 * name
 * email
 * twitter
-* questions
+* teacher? (if no the user is a student)
 
-###Teacher
-* name
-* email
-* twitter
-* rooms
+###Rooms
+* creator(teacher)
+* students
+
+###Questions
+* student (who asked)
+* room (the question was asked in)
+* upvotes (join table users to questions)
+
+
 
 ##MVP User Stories
 
@@ -57,6 +65,7 @@ WOAH! is a simple classroom tool to keep a real time tally of subjects and conce
 7. a teacher can dismiss a question so that they can stay focused.
 8. a teacher can pause a question so that they can come back to it at a more appropriate time.
 9. a student can answer their own question so that they can demonstrate their achievement in understanding.
+10. a teacher could pose a question to the class so that they can test their knowledge.
 
 ##Wireframe
 
