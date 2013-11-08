@@ -58,6 +58,10 @@ WOAH! is a simple classroom tool to keep a real time tally of subjects and conce
 8. a teacher can pause a question so that they can come back to it at a more appropriate time.
 9. a student can answer their own question so that they can demonstrate their achievement in understanding.
 
+##Wireframe
+
+* [Mobile first!](https://wireframe.cc/gTxHR3)
+
 ##Additional Goals
 * UXDI Feedback session led by UX Manager
 * Rspec / BDD component
@@ -67,3 +71,4 @@ WOAH! is a simple classroom tool to keep a real time tally of subjects and conce
 * Evaluation and presentation to other members of EdTech community.
 * Definition of next phase of development.
 * Analysis of branding / naming.
+
