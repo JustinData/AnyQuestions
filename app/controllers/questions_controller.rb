@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
   end
  
   def new
-    render :ne
+    render :new
   end
  
   def update
