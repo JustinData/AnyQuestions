@@ -1,0 +1,14 @@
+span {
+  color: red;
+}
+ 
+.box {
+  width: 320px;
+  height: 100px;
+  border: 5px solid gray;
+}
+ 
+p {
+  text-decoration: overline;
+  font-size: 2em;
+}
