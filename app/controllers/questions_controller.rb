@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
   private 
  
   def question_params
-    params.require(:question).permit(:details)
+    params.require(:question).permit(:details, :user_id)
   end
   # { :id => 1, :question => { :questions => "why?", :answered => false } }
 end
