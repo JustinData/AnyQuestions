@@ -16,7 +16,7 @@ function addList(){
     $.ajax({
       url: "/questions",
       type: "POST",
-      data: { question: {question: input} }
+      data: { question: {details: input }}
     });
   });  
 }
