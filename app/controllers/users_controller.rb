@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
+<<<<<<< HEAD
   acts_as_voter
 
 	before_action :set_user , except: [:new, :create] 
 
+=======
+  
+>>>>>>> 1fb4262f4b3209a0f7d901b900feab8569e00fff
 	def index
 		@users = User.all
 	end
