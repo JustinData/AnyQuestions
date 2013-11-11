@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	before_action :set_user , except: [:new, :create] 
+	before_action :set_user , :authenticated!, :authorized!, only: [:show] 
 
 	def index
 		@users = User.all
@@ -28,6 +28,12 @@ class UsersController < ApplicationController
 	def user_params
 		params.require(:user).permit(:email, :password, :password_confirmation, :name)
 	end
+
+	def authorized!
+    	unless @user.id == session[:user_id]
+    		redirect_to user_path(session[:user_id])
+    	end
+  	end
 
 	def set_user
     	@user = User.find(params[:id])
