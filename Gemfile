@@ -6,6 +6,9 @@ gem 'rails', '4.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+# Use thumbs_up
+gem 'thumbs_up'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

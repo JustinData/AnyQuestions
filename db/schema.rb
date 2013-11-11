@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131110211508) do
+ActiveRecord::Schema.define(version: 20131111182231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,13 +37,6 @@ ActiveRecord::Schema.define(version: 20131110211508) do
     t.boolean  "dismissed",   default: false
   end
 
-  create_table "upvotes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: true do |t|
     t.integer  "user_id"
     t.string   "name",                            null: false
@@ -54,11 +47,22 @@ ActiveRecord::Schema.define(version: 20131110211508) do
     t.datetime "updated_at"
   end
 
+  create_table "votes", force: true do |t|
+    t.boolean  "vote",          default: false, null: false
+    t.integer  "voteable_id",                   null: false
+    t.string   "voteable_type",                 null: false
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true, using: :btree
+  add_index "votes", ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type", using: :btree
+
   add_foreign_key "comments", "users", name: "comments_user_id_fk"
 
   add_foreign_key "questions", "users", name: "questions_user_id_fk"
-
-  add_foreign_key "upvotes", "questions", name: "upvotes_question_id_fk"
-  add_foreign_key "upvotes", "users", name: "upvotes_user_id_fk"
 
 end
