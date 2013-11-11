@@ -1,6 +1,6 @@
 Whoa::Application.routes.draw do
  
-  root 'sessions#new'
+  root 'welcome#index'
 
   #root 'questions#index' erica's root
 
@@ -9,5 +9,7 @@ Whoa::Application.routes.draw do
   resources :users
 
   resource :session
+
+  resource :welcome, only: [:index]
 
 end
