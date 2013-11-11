@@ -6,6 +6,7 @@ $(function(){
 function addList(){
   var input;
   var form = $('form');
+  var session_id = $('#session_id').innerHTML;
   form.submit( function( event ) {
     event.preventDefault();
     var input = $('input.question').val();
@@ -16,7 +17,7 @@ function addList(){
     $.ajax({
       url: "/questions",
       type: "POST",
-      data: { question: {details: input }}
+      data: { question: {details: input, user_id: valueofthediv}}
     });
   });  
 }

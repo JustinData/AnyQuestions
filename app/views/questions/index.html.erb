@@ -1,15 +1,15 @@
 <h1>Woah <span>.</span></h1>
 <div class="box" id="1">
-<form name="question" method="get">
-Question: <input type="text" name="command" class="question">
- <button>Submit</button>
-</form>
 <div id="session_id" style="visibility: hidden">
   <%= @user_id %>
 </div>
 <ol class="list" id="2">
   <% @questions.each do |question| %>
-   <%= question.details %>
+   <li><%= question.details %></li>
    <% end %>
+<form name="question" method="get">
+Question: <input type="text" name="command" class="question">
+<button>Submit</button>
+</form>
 </ol>
 </div>
