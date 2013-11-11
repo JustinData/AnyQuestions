@@ -13,5 +13,9 @@ GA WDI Project Number 2 - Team inGenius, App TBA
 
 ###Repo
 This is a standard rails 4 application.
-Project Requirements - second_project_outline.md
-Project Proposal - project_proposal_woah.md
+* Project Requirements - second_project_outline.md
+* Project Proposal - project_proposal_woah.md
+
+
+###Pivotal Tracker
+[ Pivotal Tracker Board ](https://www.pivotaltracker.com/s/projects/952350)
