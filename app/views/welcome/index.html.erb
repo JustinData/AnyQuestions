@@ -1,9 +1,5 @@
 <h1>Whoa!</h1>
 
-<% if ! logged_in? %>
         <%= link_to "Create an Account", new_user_path %><br>
 
         <%= link_to "Sign in to your account", new_session_path %><br>
-<% else %>
-        <%= link_to "Go to your room!", user_path( current_user ) %><br>
-<% end %>
