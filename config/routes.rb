@@ -18,5 +18,4 @@ Whoa::Application.routes.draw do
 
   resources :votes
 
-
 end

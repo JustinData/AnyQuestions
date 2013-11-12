@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	before_action :set_user , :authenticated!, :authorized!, only: [:show] 
+	  before_action :authenticated!, :set_user, :authorized!, except: [:new, :create]
 
 	def index
 		@users = User.all
