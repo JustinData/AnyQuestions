@@ -14,8 +14,11 @@ Question: <input type="text" name="command" class="question">
 <ol class="list" id="2">
   <% @answered_questions.each do |question| %>
     <li> <%= question.details %> |
-      <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
+      <%= link_to('Woah!', vote_up_question_path(question[:id]), :method => :post) %> |
       <%= question.votes_for %>
+      <% if @current_user.teacher == true %>
+		<%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
+      <% end %>
     </li>
   <% end %>
 </ol>

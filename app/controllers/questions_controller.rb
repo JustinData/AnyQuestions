@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :set_user, only: [:index, :mark_answered]
   before_action :authenticated!, only: [:index]
 
   def index
@@ -57,6 +58,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def mark_answered
+    @question = Question.find(params[:id])
+    binding.pry
+    @question.answered = true
+    @question.save
+
+    render :index
+
+  end
+
   private 
  
   def question_params
@@ -70,6 +81,6 @@ class QuestionsController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @current_user = User.find(session[:user_id])
   end
 end
