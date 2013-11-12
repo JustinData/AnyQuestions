@@ -1,12 +1,12 @@
 class QuestionsController < ApplicationController
   def index
-    render :index
     @questions = Question.order("created_at ASC").all
+    @user_id = session[:user_id]
   end
  
   def create
     @question = Question.new(question_params)
- 
+
     if @question.save
       render json: @question
     else
@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
   end
  
   def new
-    render :ne
+    render :new
   end
  
   def update
@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
   private 
  
   def question_params
-    params.require(:question).permit(:question, :answered)
+    params.require(:question).permit(:details)
   end
   # { :id => 1, :question => { :questions => "why?", :answered => false } }
 end
