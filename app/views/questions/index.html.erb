@@ -7,20 +7,20 @@
     <input type="text" placeholder="Type your question here" name="command" class="question">
     <button>Submit</button>
   </form>
-<div id="session_id" style="visibility: hidden">
-  <%= @user_id %>
-</div>
-
-<div class="packery">
-  <% @questions.each do |question| %>
-<div class="item">
-  <div class="item-content">
-  <%= question.id %>. <%= question.details %>" posted by User 
-  <%= question.user_id %>
+  <div id="session_id" style="visibility: hidden">
+    <%= @user_id %>
   </div>
-</div>
-  <% end %>
-</div>
+
+  <div class="packery">
+    <% @questions.each do |question| %>
+      <div class="item">
+        <div class="item-content">
+        <%= question.id %>. <%= question.details %>" posted by User 
+        <%= question.user_id %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <!-- close container div -->

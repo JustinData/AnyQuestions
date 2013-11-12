@@ -9,36 +9,40 @@ function addList(){
   var session_id = $('#session_id').text();
   form.submit( function( event ) {
     event.preventDefault();
-
     var question = $('input.question').val(); 
-    var colors = ["red", "blue", "goldenrod", "green"];
-    var outerDiv = $('<div class="item">');
-
-    var innerDiv = $("<div class='item-content'>")
-    innerDiv.text(question);
-    innerDiv.css("background", _.sample(colors));
-
-    outerDiv.append(innerDiv);
-    $('div.packery').append(outerDiv);
-    pckry.appended( outerDiv[0] );
-
     $('input.question').val("");
 
     $.ajax({
       url: "/questions",
       type: "POST",
-      data: { question: {details: question, user_id: session_id}}
+      data: { question: {details: question, user_id: session_id}},
+      success: appendQuestion
     });
 
   });  
 }
+
+function appendQuestion(question) {
+  console.log(question);
+
+  var colors = ["red", "blue", "goldenrod", "green"];
+  var outerDiv = $('<div class="item">');
+
+  var innerDiv = $("<div class='item-content'>")
+  innerDiv.text(question.id + " " +  question.details + " posted by User " + question.user_id);
+  innerDiv.css("background", _.sample(colors));
+
+  outerDiv.append(innerDiv);
+  $('div.packery').append(outerDiv);
+  pckry.appended( outerDiv[0] );
+}
  
-  function toggleList() {
-    $("p").hide();
-    $("h1").click(function() {
+function toggleList() {
+  $("p").hide();
+  $("h1").click(function() {
     $(this).next().slideToggle(300);
   });
-  }
+}
 
 var transitionProp = getStyleProperty('transition');
 var transitionEndEvent = {
