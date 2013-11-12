@@ -51,7 +51,7 @@ class QuestionsController < ApplicationController
       current_user.vote_for(the_question)
       @questions = Question.order("created_at ASC").all
 
-      render :index
+      redirect_to questions_path
 
     rescue ActiveRecord::RecordInvalid
       render :error
