@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
  
   def create
     @question = Question.new(question_params)
-    binding.pry
+  
     if @question.save
       render json: @question
     else
@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
  
   def update
     @question = Question.find(params[:id])
- 
+
     if @question.update
       render status: 200, nothing: true
     else
