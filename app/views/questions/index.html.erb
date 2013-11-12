@@ -7,7 +7,7 @@
 <div class="container">
   
   <!-- form for inputing question -->
-  <form name="question" method="get">
+  <form name="question" method="get" class="question-form">
     <input type="text" placeholder="Type your question here" name="command" class="question">
     <button>Submit</button>
   </form>
@@ -18,7 +18,7 @@
   </div>
 
   <div class="packery">
-    <% @questions.each do |question| %>
+    <% @unanswered_questions.each do |question| %>
       <div class="item">
         <div class="item-content">
         <%= question.id %>. <%= question.details %>" posted by User 
@@ -26,6 +26,9 @@
 
         <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
         <%= question.votes_for %>
+        <% if @current_user.teacher == true %>
+			<%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
+    	<% end %>
         </div>
       </div>
     <% end %>
@@ -33,4 +36,3 @@
 
 </div>
 <!-- close container div -->
-
