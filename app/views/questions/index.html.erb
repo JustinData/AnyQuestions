@@ -12,7 +12,7 @@ Question: <input type="text" name="command" class="question">
 </div>
 
 <ol class="list" id="2">
-  <% @questions.each do |question| %>
+  <% @answered_questions.each do |question| %>
     <li> <%= question.details %> |
       <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
       <%= question.votes_for %>
