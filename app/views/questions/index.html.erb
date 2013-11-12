@@ -6,12 +6,18 @@
 Question: <input type="text" name="command" class="question">
  <button>Submit</button>
 </form>
+
 <div id="session_id" style="visibility: hidden">
   <%=@user_id%>
 </div>
+
 <ol class="list" id="2">
   <% @questions.each do |question| %>
-   <%= question.details %>
+   <li> <%= question.details %> |
+    <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
+    <%= question.votes_for %>
+  </li>
+  
    <% end %>
 </ol>
 </div>
