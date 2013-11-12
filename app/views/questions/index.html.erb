@@ -10,7 +10,10 @@ Question: <input type="text" name="command" class="question">
 </div>
 <ol class="list" id="2">
   <% @questions.each do |question| %>
-   <%= question.details %>
-   <% end %>
+    <%= question.details %>
+    <% if question.answered == false %>
+	  <%  %>
+	<% end %>
+  <% end %>
 </ol>
 </div>

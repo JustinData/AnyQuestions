@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
   def index
     @questions = Question.order("created_at ASC").all
+    @answered_questions = Question.where("answered = false").plusminus_tally
+    binding.pry
     @user_id = session[:user_id]
   end
  
