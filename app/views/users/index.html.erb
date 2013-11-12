@@ -1,7 +1,6 @@
 <div>
   <div>
-    <h1>This is Woah<span>.</span></h1> <%= link_to "Start Questioning", questions_path %><br>
- Ask away.
+    <h1>This is Woah<span>.</span></h1> 
   </div>
 </div>
 
@@ -12,4 +11,5 @@
 </div>
 <% @users.each do |u| %>
 	<li><%= u.name %></li>
+  <li><%= link_to "Start Questioning", questions_path %></li>
 <% end %>
