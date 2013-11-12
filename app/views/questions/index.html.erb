@@ -21,7 +21,7 @@
     <% @unanswered_questions.each do |question| %>
       <div class="item">
         <div class="item-content">
-        <%= question.id %>. <%= question.details %>" posted by User 
+        <%= question.details %>" posted by User 
         <%= question.user.name %>
 
         <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
