@@ -22,7 +22,7 @@
       <div class="item">
         <div class="item-content">
         <%= question.id %>. <%= question.details %>" posted by User 
-        <%= question.user_id %>
+        <%= question.user.name %>
 
         <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
         <%= question.votes_for %>
