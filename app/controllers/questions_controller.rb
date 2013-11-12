@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.order("created_at ASC").all
-    @answered_questions = Question.where("answered = false").plusminus_tally
+    @unanswered_questions = Question.where("answered = false").plusminus_tally
     @user_id = session[:user_id]
     # binding.pry
   end
@@ -60,11 +60,11 @@ class QuestionsController < ApplicationController
 
   def mark_answered
     @question = Question.find(params[:id])
-    binding.pry
+    # binding.pry
     @question.answered = true
     @question.save
 
-    render :index
+    redirect_to questions_path
 
   end
 
