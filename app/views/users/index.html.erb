@@ -1,3 +1,15 @@
+<div>
+  <div>
+    <h1>This is Woah<span>.</span></h1> <%= link_to "Start Questioning", questions_path %><br>
+ Ask away.
+  </div>
+</div>
 
-<h2> hello <%= @user.name %></h2>
-<h2> <%= @user.email %></h2>
+<div>
+  <h3>
+    Who's online?
+  </h3>
+</div>
+<% @users.each do |u| %>
+	<li><%= u.name %></li>
+<% end %>

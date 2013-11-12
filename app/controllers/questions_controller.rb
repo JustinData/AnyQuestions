@@ -1,7 +1,11 @@
 class QuestionsController < ApplicationController
+  before_action :authenticated!, only: [:index]
+
   def index
     @questions = Question.order("created_at ASC").all
+    @answered_questions = Question.where("answered = false").plusminus_tally
     @user_id = session[:user_id]
+    # binding.pry
   end
  
   def create
@@ -59,4 +63,13 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:details, :user_id)
   end
   # { :id => 1, :question => { :questions => "why?", :answered => false } }
+  def authorized!
+    if session[:user_id] == nil
+      redirect_to new_session_path
+    end
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 end

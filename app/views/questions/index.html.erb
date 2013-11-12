@@ -1,23 +1,36 @@
+<!-- making the javascript specific to this controller to avoid scope problems  -->
 <%= javascript_include_tag params[:controller] %>
 
 <h1>Woah <span>.</span></h1>
-<div class="box" id="1">
-<form name="question" method="get">
-Question: <input type="text" name="command" class="question">
- <button>Submit</button>
-</form>
 
-<div id="session_id" style="visibility: hidden">
-  <%=@user_id%>
-</div>
-
-<ol class="list" id="2">
-  <% @questions.each do |question| %>
-   <li> <%= question.details %> |
-    <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
-    <%= question.votes_for %>
-  </li>
+<!-- main div to allow everything to collapse, connected to toggle function in questions.js -->
+<div class="container">
   
-   <% end %>
-</ol>
+  <!-- form for inputing question -->
+  <form name="question" method="get">
+    <input type="text" placeholder="Type your question here" name="command" class="question">
+    <button>Submit</button>
+  </form>
+  
+  <!-- hidden field to hold user id for ajax requests -->
+  <div id="session_id" style="visibility: hidden">
+    <%= @user_id %>
+  </div>
+
+  <div class="packery">
+    <% @questions.each do |question| %>
+      <div class="item">
+        <div class="item-content">
+        <%= question.id %>. <%= question.details %>" posted by User 
+        <%= question.user_id %>
+
+        <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
+        <%= question.votes_for %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
 </div>
+<!-- close container div -->
+
