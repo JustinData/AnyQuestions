@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
  
   def create
     @question = Question.new(question_params)
-
+  
     if @question.save
       render json: @question
     else
@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
  
   def update
     @question = Question.find(params[:id])
- 
+
     if @question.update
       render status: 200, nothing: true
     else
@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
   private 
  
   def question_params
-    params.require(:question).permit(:details)
+    params.require(:question).permit(:details, :user_id)
   end
   # { :id => 1, :question => { :questions => "why?", :answered => false } }
 end
