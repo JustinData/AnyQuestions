@@ -1,15 +1,22 @@
 Whoa::Application.routes.draw do
+
+  resources :questions do
+    member do
+      post :vote_up
+    end
+  end
  
   root 'welcome#index'
 
-  #root 'questions#index' erica's root
-
-  resources :questions
+  #resources :questions
   
   resources :users
 
   resource :session
 
   resource :welcome, only: [:index]
+
+  resources :votes
+
 
 end
