@@ -1,5 +1,7 @@
 $(function(){
   addList();
+
+  /* UI for rolling up container */
   toggleList();
 });
  
@@ -9,19 +11,24 @@ function addList(){
   var session_id = $('#session_id').text();
   form.submit( function( event ) {
     event.preventDefault();
+
+    //get the question
     var question = $('input.question').val(); 
+
+    //clear input box now that we have input
     $('input.question').val("");
 
+    //create ajax request with the question and the user_id
     $.ajax({
       url: "/questions",
       type: "POST",
       data: { question: {details: question, user_id: session_id}},
       success: appendQuestion
     });
-
   });  
 }
 
+//pending successful AJAX request - aka, don't display the question until we know it is persisted on server
 function appendQuestion(question) {
   console.log(question);
 
@@ -37,6 +44,7 @@ function appendQuestion(question) {
   pckry.appended( outerDiv[0] );
 }
  
+/**** Handles roll up of all the questions ****/
 function toggleList() {
   $("p").hide();
   $("h1").click(function() {
@@ -51,6 +59,7 @@ var transitionEndEvent = {
   OTransition: 'otransitionend',
   transition: 'transitionend'
 }[ transitionProp ];
+
 
 docReady( function() {
   var container = document.querySelector('.packery');

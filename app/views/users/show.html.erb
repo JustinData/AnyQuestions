@@ -1,4 +1,15 @@
+
+<h2> hello <%= @user.name %></h2>
+<h2><%= @user.email %></h2>
+
+
 <% if @user.teacher == true %>
 		You are a teacher!
 <% end %>
+
 Welcome, <%= @user.name %>.
+
+
+<%= link_to "Add new students to the class:", new_user_path(@user) %> 
+<%= link_to "See all students in the class:", user_path(@user) %> 
+

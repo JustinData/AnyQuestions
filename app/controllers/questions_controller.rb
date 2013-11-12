@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
  
   def create
     @question = Question.new(question_params)
-
+  
     if @question.save
       render json: @question
     else
@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
  
   def update
     @question = Question.find(params[:id])
- 
+
     if @question.update
       render status: 200, nothing: true
     else
@@ -38,6 +38,21 @@ class QuestionsController < ApplicationController
     end
   end
  
+  def vote_up
+    begin
+      #binding.pry
+      current_user = User.find(session[:user_id])
+      the_question = Question.find(params[:id])
+      current_user.vote_for(the_question)
+      @questions = Question.order("created_at ASC").all
+
+      render :index
+
+    rescue ActiveRecord::RecordInvalid
+      render :error
+    end
+  end
+
   private 
  
   def question_params
