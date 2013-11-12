@@ -1,5 +1,15 @@
-hello
+<div>
+  <div>
+    <h1>This is Woah<span>.</span></h1> <%= link_to "Start Questioning", questions_path %><br>
+ Ask away.
+  </div>
+</div>
 
+<div>
+  <h3>
+    Who's online?
+  </h3>
+</div>
 <% @users.each do |u| %>
-	<%= u.name %>
+	<li><%= u.name %></li>
 <% end %>
