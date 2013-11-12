@@ -10,7 +10,7 @@ Whoa::Application.routes.draw do
 
   #resources :questions
   
-  resources :users
+  resources :users, only: [:index, :new, :create]
 
   resource :session
 
