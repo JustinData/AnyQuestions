@@ -1,4 +1,5 @@
 class Json::QuestionsController < ApplicationController
+  
   def index
     @questions = Question.order("created_at ASC").all
     @unanswered_questions = Question.where("answered = false").plusminus_tally
@@ -8,6 +9,10 @@ class Json::QuestionsController < ApplicationController
     
   end
 
+  def getvotes
+    @the_question = Question.find(params[:id])
+    render json: [{question: @the_question}, {votes: @the_question.votes_for}] and return
+  end
 
 # def create
 #   @question = Question.new(question_params)

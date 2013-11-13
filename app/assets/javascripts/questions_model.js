@@ -1,10 +1,11 @@
 // Question object
-function Question(q, uId) {
+function Question(q, uId, qId) {
 	this.details = q;
 	this.votes = 0;
 	this.answered = false;
 	this.paused = false;
 	this.userId = uId;
+	this.questionId = qId;
 };
 
 Question.prototype.upVote = function() {
@@ -26,8 +27,11 @@ QuestionList.prototype.sort = function() {
 
 QuestionList.prototype.addQuestion = function( qObj ) {
 	this.questions.push( qObj );
-	this.sort();
+	// this.sort();
 };
+
+//===========
+
 
 function controllerSetup(){
 	$.ajax({
@@ -39,6 +43,37 @@ function controllerSetup(){
 
 function controllerBuildModel(serverResponse){
 	console.log(serverResponse);
+	var numQuestions = serverResponse[0].questions.length;
+	for (var i = 0; i < numQuestions; i++){
+		var tempQuestion = new Question(serverResponse[0].questions[i].details, serverResponse[0].questions[i].user_id, serverResponse[0].questions[i].id);
+		roomQuestionList.addQuestion(tempQuestion);
+	};
+};
+
+function controllerVoteSetup(){
+	var numQuestions = roomQuestionList.questions.length;
+	for (var i = 0; i < numQuestions; i++){
+
+		$.ajax({
+		url: "/json/questions/" + roomQuestionList.questions[i].questionId + "/getvotes",
+		type: "GET",
+		data: { question: {id: roomQuestionList.questions[i].questionId}},
+    	success: controllerUpdateVotes
+    	});
+
+	};
+};
+
+function controllerUpdateVotes(serverResponse){
+	console.log(serverResponse);
+};
+
+window.onLoad = function(){
+	console.log("onload");
+	var roomQuestionList = new QuestionList();
+	
+	controllerSetup();
+
 };
 //===============================
 

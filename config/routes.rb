@@ -34,6 +34,10 @@ Whoa::Application.routes.draw do
       member do
         post 'mark_answered'
       end
+
+      member do
+        get :getvotes
+      end
     end
 
   end
