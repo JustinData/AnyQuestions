@@ -1,3 +1,5 @@
+//TODO make it into a model
+
 $(function(){
   addList();
 
