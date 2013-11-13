@@ -1,5 +1,25 @@
+body {
+      background: #f4eedf;
+      padding: 0;
+      font-family: 'open sans';
+      position: relative;
+      margin: 0;
+      height: 100%;
+    }
+
+h1, h2 {
+      width: 100%;
+      float: left;
+    }
+
+h1 {
+      margin-top: 100px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+    
 span {
-  color: red;
+    color: red;
 }
  
 * {
