@@ -22,12 +22,12 @@
       <div class="item">
         <div class="item-content" data-val="<%= question.id%>">
         <%= question.details %>" posted by User 
-        <%= question.user_id %>
+        <%= question.user.name %>
 
         <div class="upButton">&oplus;</div>
         <div class=votesDiv><%= question.votes_for %></div>
         
-        <% if @current_user.teacher == true %>
+       <% if (@current_user.teacher == true) || (question.user.id == session[:user_id]) %>
 			   <%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
     	  <% end %>
 
