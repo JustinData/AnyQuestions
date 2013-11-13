@@ -1,0 +1,39 @@
+<!-- making the javascript specific to this controller to avoid scope problems  -->
+<%= javascript_include_tag params[:controller] %>
+
+<h1>Woah <span>.</span></h1>
+
+<!-- main div to allow everything to collapse, connected to toggle function in questions.js -->
+<div class="container">
+  
+  <!-- form for inputing question -->
+  <form name="question" method="get" class="question-form">
+    <input type="text" placeholder="Type your question here" name="command" class="question">
+    <button>Submit</button>
+  </form>
+  
+  <!-- hidden field to hold user id for ajax requests -->
+  <div id="session_id" style="visibility: hidden">
+    <%= @user_id %>
+  </div>
+
+  <div class="packery">
+    <% @unanswered_questions.each do |question| %>
+      <div class="item">
+        <div class="item-content" data-val="<%= question.id%>">
+        <%= question.details %>" posted by User         
+
+        <div class="upButton">&oplus;</div>
+        <div class=votesDiv><%= question.votes_for %></div>
+        
+       <% if (@current_user.teacher == true) || (question.user.id == session[:user_id]) %>
+			   <%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
+    	  <% end %>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+<!-- close container div -->

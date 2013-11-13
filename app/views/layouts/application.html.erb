@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Whoa</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+<!-- <script src="/path/to/packery.pkgd.min.js"></script> -->
+<!--   <link rel="stylesheet" type="text/css" href="ombre.css" /> -->
+</head>
+<body>
+<nav>
+      <% if logged_in? %>
+        <ul>
+          <li><%= link_to 'Students Currently Logged In', users_path(@user) %> </li>
+          <li><%= link_to 'Logout', session_path, :method => :delete %></li>
+        </ul>
+      <% end %>
+  </nav>
+</div>
+<%= yield %>
+</body>
+</html>
