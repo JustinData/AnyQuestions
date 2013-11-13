@@ -65,6 +65,11 @@ function controllerVoteSetup(){
 };
 
 function controllerUpdateVotes(serverResponse){
+	
+	var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.questionId });
+	var index = $.inArray(serverResponse[0].question.id, tempArray);
+
+	roomQuestionList.questions[index].votes = serverResponse[1].votes;
 	console.log(serverResponse);
 };
 
