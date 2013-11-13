@@ -20,12 +20,13 @@
   <div class="packery">
     <% @questions.each do |question| %>
       <div class="item">
-        <div class="item-content">
-        <%= question.id %>. <%= question.details %>" posted by User 
+        <div class="item-content" data-val="<%= question.id%>">
+        <%= question.details %>" posted by User 
         <%= question.user_id %>
 
-        <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
-        <%= question.votes_for %>
+        <div class="upButton">&oplus;</div>
+        <div class=votesDiv><%= question.votes_for %></div>
+        
         </div>
       </div>
     <% end %>
