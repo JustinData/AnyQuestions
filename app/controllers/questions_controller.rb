@@ -47,14 +47,27 @@ class QuestionsController < ApplicationController
     begin
       #binding.pry
       current_user = User.find(session[:user_id])
+<<<<<<< HEAD
       the_question = Question.find(params[:id])
       current_user.vote_for(the_question)
       @questions = Question.order("created_at ASC").all
 
       redirect_to questions_path
+=======
+      
+      @the_question = Question.find(params[:id])
+      
+      if current_user.vote_for(@the_question)
+        render json: [{question: @the_question}, {votes: @the_question.votes_for}]
+      else
+        render status: 400, nothing: true
+      end
+      # @questions = Question.order("created_at ASC").all
+      # render :index
+>>>>>>> 84c5c46022db8f7aa88686bc45a3e966a7fbc9d6
 
     rescue ActiveRecord::RecordInvalid
-      render :error
+      render json: @the_question.votes_for
     end
   end
 
