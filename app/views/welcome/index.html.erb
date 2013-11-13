@@ -1,7 +1,21 @@
-<h1>Welcome to Woah</h1><span>.</span>
+<h1>Welcome to Woah.</h1>
 
-        <%= link_to "Create an Account", new_user_path %><br>
+  <% if ! logged_in? %>
+
+        <%= link_to "Sign up for an Account", new_user_path %><br>
 
         <%= link_to "Sign in to your account", new_session_path %><br>
+
+  <% else %>
+
+        <%= link_to "Go to your page!", user_path( current_user ) %><br>
+
+        <%= link_to "Sign out of your account", session_path, :method => :delete %>
+
+  <% end %>
+
+
+
+
 
 
