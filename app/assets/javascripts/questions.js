@@ -55,8 +55,6 @@ function appendQuestion(question) {
   var votesDiv = $("<div class=votesDiv>0</div>")
   innerDiv.append(votesDiv);
 
- 
-
   //append the div with the new question.
   outerDiv.append(innerDiv);
   $('div.packery').append(outerDiv);
