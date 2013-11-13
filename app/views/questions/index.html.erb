@@ -21,8 +21,7 @@
     <% @unanswered_questions.each do |question| %>
       <div class="item">
         <div class="item-content" data-val="<%= question.id%>">
-        <%= question.details %>" posted by User 
-        <%= question.user.name %>
+        <%= question.details %>" posted by User         
 
         <div class="upButton">&oplus;</div>
         <div class=votesDiv><%= question.votes_for %></div>
