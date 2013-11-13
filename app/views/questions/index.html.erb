@@ -26,9 +26,10 @@
 
         <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
         <%= question.votes_for %>
-        <% if @current_user.teacher == true %>
-			<%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
-    	<% end %>
+        <% if (@current_user.teacher == true) || (question.user.id == session[:user_id]) %>
+          <%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
+
+        <% end %>
         </div>
       </div>
     <% end %>
