@@ -13,7 +13,7 @@ $(function(){
  
 function addList(){
   var input;
-  var form = $('form');
+  var form = $('.question-form');
   var session_id = $('#session_id').text();
   form.submit( function( event ) {
     event.preventDefault();

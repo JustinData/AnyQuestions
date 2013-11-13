@@ -7,7 +7,7 @@
 <div class="container">
   
   <!-- form for inputing question -->
-  <form name="question" method="get">
+  <form name="question" method="get" class="question-form">
     <input type="text" placeholder="Type your question here" name="command" class="question">
     <button>Submit</button>
   </form>
@@ -18,7 +18,7 @@
   </div>
 
   <div class="packery">
-    <% @questions.each do |question| %>
+    <% @unanswered_questions.each do |question| %>
       <div class="item">
         <div class="item-content" data-val="<%= question.id%>">
         <%= question.details %>" posted by User 
@@ -27,6 +27,10 @@
         <div class="upButton">&oplus;</div>
         <div class=votesDiv><%= question.votes_for %></div>
         
+        <% if @current_user.teacher == true %>
+			   <%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
+    	  <% end %>
+
         </div>
       </div>
     <% end %>
@@ -34,4 +38,3 @@
 
 </div>
 <!-- close container div -->
-

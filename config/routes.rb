@@ -4,19 +4,22 @@ Whoa::Application.routes.draw do
     member do
       post :vote_up
     end
+
+    member do
+      post 'mark_answered'
+    end
   end
  
   root 'welcome#index'
 
   #resources :questions
   
-  resources :users
+  resources :users, only: [:index, :new, :create]
 
   resource :session
 
   resource :welcome, only: [:index]
 
   resources :votes
-
 
 end

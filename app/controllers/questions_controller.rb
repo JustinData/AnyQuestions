@@ -1,9 +1,10 @@
 class QuestionsController < ApplicationController
+  before_action :set_user, only: [:index, :mark_answered]
   before_action :authenticated!, only: [:index]
 
   def index
     @questions = Question.order("created_at ASC").all
-    @answered_questions = Question.where("answered = false").plusminus_tally
+    @unanswered_questions = Question.where("answered = false").plusminus_tally
     @user_id = session[:user_id]
     # binding.pry
   end
@@ -46,6 +47,7 @@ class QuestionsController < ApplicationController
     begin
       #binding.pry
       current_user = User.find(session[:user_id])
+      
       @the_question = Question.find(params[:id])
       
       if current_user.vote_for(@the_question)
@@ -61,6 +63,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def mark_answered
+    @question = Question.find(params[:id])
+    # binding.pry
+    @question.answered = true
+    @question.save
+
+    redirect_to questions_path
+
+  end
+
   private 
  
   def question_params
@@ -74,6 +86,6 @@ class QuestionsController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @current_user = User.find(session[:user_id])
   end
 end
