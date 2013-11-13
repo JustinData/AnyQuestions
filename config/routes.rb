@@ -22,4 +22,21 @@ Whoa::Application.routes.draw do
 
   resources :votes
 
+  
+
+  namespace :json do
+
+    resources :questions do
+      member do
+        post :vote_up
+      end
+    end
+
+  end
+
+
+
+
+
+
 end
