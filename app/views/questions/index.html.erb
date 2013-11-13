@@ -20,16 +20,17 @@
   <div class="packery">
     <% @unanswered_questions.each do |question| %>
       <div class="item">
-        <div class="item-content">
+        <div class="item-content" data-val="<%= question.id%>">
         <%= question.details %>" posted by User 
         <%= question.user.name %>
 
-        <%= link_to('Woah!', vote_up_question_path(question), :method => :post) %> |
-        <%= question.votes_for %>
-        <% if (@current_user.teacher == true) || (question.user.id == session[:user_id]) %>
-          <%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
+        <div class="upButton">&oplus;</div>
+        <div class=votesDiv><%= question.votes_for %></div>
+        
+       <% if (@current_user.teacher == true) || (question.user.id == session[:user_id]) %>
+			   <%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
+    	  <% end %>
 
-        <% end %>
         </div>
       </div>
     <% end %>
