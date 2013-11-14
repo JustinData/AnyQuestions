@@ -11,12 +11,12 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to questions_path#users_path #user_path(user)
     else
-      redirect_to new_session_path
+      redirect_to new_user_path
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to(new_session_path)
+    redirect_to root_path
   end
 end

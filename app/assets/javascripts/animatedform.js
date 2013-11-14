@@ -3,7 +3,6 @@ $(function() {
         var $form_wrapper = $('#form_wrapper'),
           //the current form is the one with class active
           $currentForm  = $form_wrapper.children('form.active');
-          console.log($currentForm),
           //the change form links
           $linkform   = $form_wrapper.find('.linkform');
             
@@ -67,7 +66,7 @@ $(function() {
         */
         $form_wrapper.find('input[type="submit"]')
                .click(function(e){
-              
+
                });
              });
 

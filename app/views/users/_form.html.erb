@@ -57,3 +57,10 @@
   </div>
 <% end %>
 <!-- end login form -->
+
+<script type="text/javascript">$(function(){
+  console.log('<%= params[:a] %>');
+  if ('<%= params[:a] %>' !== 'login') {
+    $(".linkform").trigger("click");
+  }
+});</script>
