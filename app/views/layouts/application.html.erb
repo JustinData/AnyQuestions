@@ -6,18 +6,26 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <script src="/path/to/packery.pkgd.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="ombre.css" />
 </head>
 <body>
 <nav>
-      <% if logged_in? %>
+<!-- start hello bar -->
+<div class="hello-bar">
+    <% if logged_in? %>
         <ul>
-          <li><%= link_to 'Students Currently Logged In', users_path(@user) %> </li>
+          <li><%= link_to 'All Users', users_path(@user) %></li>
           <li><%= link_to 'Logout', session_path, :method => :delete %></li>
         </ul>
       <% end %>
+    <% if !logged_in? %>
+        <ul>
+          <li><%= link_to "Create an Account", new_user_path %></li>
+          <li><%= link_to "Sign In", new_session_path %></li>
+        </ul>
+      <% end %>  
+</div> 
+<!-- end hello bar -->    
   </nav>
-</div>
 <%= yield %>
 </body>
 </html>

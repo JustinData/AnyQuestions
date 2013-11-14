@@ -1,14 +1,110 @@
+html {
+  font-size: 16px;
+}
+
+body {
+      background: #f4eedf;
+      padding: 0;
+      font-family: 'open sans';
+      position: relative;
+      margin: 0
+    }
+
+.hello-bar {
+  color: #82826e;
+  font-size: 1.6em;
+  font-weight: bold;
+  text-align: center;
+  background: #e4e5c9 url(../imgs/hello-bar-bg.png) no-repeat 35px 13px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .54);
+  width: 100%;
+  height: 49px;
+  position: relative;
+}
+
+.hello-bar:before,
+.hello-bar:after {
+  content: "";
+  display: table;
+  list-style:none;
+  background-image:none;
+  background-repeat:none;
+  background-position:0; 
+}
+
+.hello-bar:after {
+  clear: both;
+}
+
+.hello-bar {
+  zoom: 1;
+  list-style:none;
+  background-image:none;
+  background-repeat:none;
+  background-position:0; 
+}
+
+.hello-bar ul {
+    width: 695px;
+    margin: 11px;
+    list-style-type:none;
+    padding:2px;
+}
+
+    .hello-bar li {
+      line-height: 28px;
+      float: left;
+      font-style: bold;
+      margin: 5px;
+      padding: 5px;
+    }
+
+  .hello-bar .close {
+    text-indent: -9999em;
+    background: url(../imgs/hello-bar-close.png) no-repeat top left;
+    width: 21px;
+    height: 21px;
+    position: absolute;
+    top: 15px; right: 15px;
+  }
+
+  .hello-bar .close:hover {
+    background-position: bottom left;
+  }
+
+.hello-bar-hidden .hello-bar {
+  display: none;
+}
+
+.hello-bar-hidden .logo a, .grid {
+  margin-top: 0;
+}
+
+.hello-bar-hidden .categories-panel, .breadcrumbs-search {
+  top: 0;
+}
+
+.hello-bar-hidden .grid {
+  margin: 0;
+}
+
+.hello-bar-hidden #category-parents {
+  top: 62px;
+}
+
+
 span {
-  color: red;
+    color: red;
 }
  
+li.nav {
+  display: inline;
+}
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
-
-body { font-family: garamond }
 
 .packery {
   background: #FDD;

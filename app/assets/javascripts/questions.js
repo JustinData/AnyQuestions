@@ -1,3 +1,4 @@
+
 // $(function(){
 //   addList();
 
@@ -52,8 +53,6 @@ function appendQuestion(question) {
   //build the votes div
   var votesDiv = $("<div class=votesDiv>0</div>")
   innerDiv.append(votesDiv);
-
- 
 
   //append the div with the new question.
   outerDiv.append(innerDiv);
