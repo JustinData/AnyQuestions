@@ -1,15 +1,15 @@
-$(function(){
-  addList();
+// $(function(){
+//   addList();
 
-  /* UI for rolling up container */
-  toggleList();
+//   /* UI for rolling up container */
+//   toggleList();
 
-  /* set up delegated listener for upvotes */
-  // delegated listener: $('#game').on('click', 'div.column', cardClick);
-  //$('div.item').on('click', 'img.upButton', upVoteClick);
-  $('div.packery').on('click', 'div.upButton', upVoteClick);
+//   /* set up delegated listener for upvotes */
+//   // delegated listener: $('#game').on('click', 'div.column', cardClick);
+//   //$('div.item').on('click', 'img.upButton', upVoteClick);
+//   $('div.packery').on('click', 'div.upButton', upVoteClick);
 
-});
+// });
  
 function addList(){
   var input;
@@ -42,7 +42,7 @@ function appendQuestion(question) {
   var outerDiv = $('<div class="item">');
 
   var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
-  innerDiv.text(question.details + " posted by User " + question.user_id);
+  innerDiv.text(question.details + " posted by User " + question.user.name_id);
   innerDiv.css("background", _.sample(colors));
 
   // build the upvote button & attach it to the inner div
@@ -146,13 +146,13 @@ function upVoteClick (){
 }
 
 //i need to get the votes AND the question id
-// function updateVotes(server_response){
-//   console.log(server_response);
+function updateVotes(server_response){
+  console.log(server_response);
 
-//   server_response[0].question.id;
-//   server_response[1].votes;
+  server_response[0].question.id;
+  server_response[1].votes;
   
-//   var myDiv = $('div[data-val=' + server_response[0].question.id + ']');
-//   $(myDiv.children()[1]).html(server_response[1].votes);
+  var myDiv = $('div[data-val=' + server_response[0].question.id + ']');
+  $(myDiv.children()[1]).html(server_response[1].votes);
 
-// }
+}

@@ -14,14 +14,21 @@ class Json::QuestionsController < ApplicationController
     render json: [{question: @the_question}, {votes: @the_question.votes_for}] and return
   end
 
-# def create
-#   @question = Question.new(question_params)
 
-#   if @question.save
-#     render json: @question
-#   else
-#     render status: 400, nothing: true
-#   end
-# end
+  def create
+    # binding.pry
+    @question = Question.new(question_params)
 
+    if @question.save
+      render json: @question
+    else
+      render status: 400, nothing: true
+    end
+  end
+
+  private
+
+  def question_params
+    params.require(:question).permit(:details, :user_id)
+  end
 end

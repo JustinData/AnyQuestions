@@ -8,7 +8,7 @@ function Question(q, uId, qId) {
 	this.answered = false;
 	this.paused = false;
 	this.userId = uId;
-	this.questionId = qId;
+	this.id = qId;
 };
 
 Question.prototype.upVote = function() {
@@ -46,7 +46,7 @@ function controllerSetup(){
 
 function controllerBuildModel(serverResponse){
 	var numQuestions = serverResponse[0].questions.length;
-	console.log("here")
+	// console.log("here")
 	for (var i = 0; i < numQuestions; i++){
 		var tempQuestion = new Question(serverResponse[0].questions[i].details, serverResponse[0].questions[i].user_id, serverResponse[0].questions[i].id);
 		roomQuestionList.addQuestion(tempQuestion);
@@ -61,9 +61,9 @@ function controllerVoteSetup(){
 	for (var i = 0; i < numQuestions; i++){
 
 		$.ajax({
-		url: "/json/questions/" + roomQuestionList.questions[i].questionId + "/getvotes",
+		url: "/json/questions/" + roomQuestionList.questions[i].id + "/getvotes",
 		type: "GET",
-		data: { question: {id: roomQuestionList.questions[i].questionId}},
+		data: { question: {id: roomQuestionList.questions[i].id}},
     	success: controllerUpdateVotes
     	});
 
@@ -72,11 +72,18 @@ function controllerVoteSetup(){
 
 function controllerUpdateVotes(serverResponse){
 	
-	var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.questionId });
+	var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });
 	var index = $.inArray(serverResponse[0].question.id, tempArray);
 
 	roomQuestionList.questions[index].votes = serverResponse[1].votes;
 	viewRenderVotes(roomQuestionList.questions[index])
+};
+
+function controllerUpdateNewQuestion(serverResponse){
+	console.log(serverResponse);
+	tempQuestion = new Question(serverResponse.details, serverResponse.user_id, serverResponse.id);
+	roomQuestionList.addQuestion(tempQuestion);
+	viewRenderQuestion(tempQuestion);
 };
 
 function viewRenderQuestion(question){
@@ -84,7 +91,7 @@ function viewRenderQuestion(question){
 	var colors = ["red", "blue", "goldenrod", "green"];
 	var outerDiv = $('<div class="item">');
 
-	var innerDiv = $("<div class='item-content' data-val=" + question.questionId + ">")
+	var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
 	innerDiv.text(question.details);
 	innerDiv.css("background", _.sample(colors));
 
@@ -105,16 +112,38 @@ function viewRenderQuestion(question){
 }
 
 function viewRenderVotes(question){
-	console.log("blah");
-	var myDiv = $('div[data-val=' + question.questionId + ']');
+	// console.log("blah");
+	var myDiv = $('div[data-val=' + question.id + ']');
 	$(myDiv.children()[1]).html(question.votes);
 }
 
+function viewFormListener(){
+	var form = $('.question-form');
+	var session_id = $('#session_id').text();
+	form.submit( function( event ) {
+    event.preventDefault();
+
+    //get the question
+    var question = $('input.question').val(); 
+
+    //clear input box now that we have input
+    $('input.question').val("");
+
+    //create ajax request with the question and the user_id
+    $.ajax({
+      url: "/json/questions",
+      type: "POST",
+      data: { question: {details: question, user_id: session_id}},
+      success: controllerUpdateNewQuestion
+    });
+  });
+}
+
 window.onload = function(){
-	console.log("onload");
-	
-	
+	// console.log("onload");
 	controllerSetup();
+
+	viewFormListener();
 	
 
 };
