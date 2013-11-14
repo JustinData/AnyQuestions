@@ -76,7 +76,7 @@ function controllerUpdateVotes(serverResponse){
 	var index = $.inArray(serverResponse[0].question.id, tempArray);
 
 	roomQuestionList.questions[index].votes = serverResponse[1].votes;
-	viewRenderVotes(roomQuestionList.questions[index])
+	viewRenderVotes(roomQuestionList.questions[index]);
 };
 
 function controllerUpdateNewQuestion(serverResponse){
@@ -139,45 +139,38 @@ function viewFormListener(){
   });
 }
 
+function controllerUpVote(){
+  console.log("updating the vote");
+
+  var session_id = $('#session_id').text();
+  var question_id = $(this.parentElement).data().val;
+  var url = "/json/questions/" + question_id + "/vote_up";
+
+  $.ajax({
+      url: url,
+      type: "POST",
+      data: { question: {id: question_id}},
+      success: controllerUpdateVotes
+    });
+}
+
+// function controllerUpdateVotes(serverResponse){
+//   console.log(serverResponse);
+//   //update the model
+//   //update the display
+
+// }
+
+function viewUpVoteListener(){
+  $('div.packery').on('click', 'div.upButton', controllerUpVote);
+}
+
 window.onload = function(){
-	// console.log("onload");
+	
 	controllerSetup();
 
 	viewFormListener();
-	
+	viewUpVoteListener();
+  
 
 };
-//===============================
-
-//  var q1 = new Question("How does OOP work?");
-
-// q1.votes;
-// //=>0
-
-// q1.upVote();
-// q1.votes;
-// //=>1
-
-// q1.answered;
-// //=>false
-
-// q1.answer();
-// q1.answered;
-// //=>true
-
-// var questionArray = [q1,q2,q3,q4,q5];
-
-  //add jquery to make the new question show up on the page
-
-  //...
-
-//-------------------------------------------------------------
-// var questionList = new QuestionList();
-
-// questionList.addQuestion( q1 );
-// questionList.addQuestion( q2 );
-// questionList.addQuestion( q3 );
-// questionList.addQuestion( q4 );
-// questionList.addQuestion( q5 );
-
-// questionList.sort();

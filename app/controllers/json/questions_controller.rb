@@ -14,6 +14,17 @@ class Json::QuestionsController < ApplicationController
     render json: [{question: @the_question}, {votes: @the_question.votes_for}] and return
   end
 
+  def vote_up
+
+    current_user = User.find(session[:user_id])
+    @the_question = Question.find(params[:id])
+
+    current_user.vote_for(@the_question)
+  
+    render json: [{question: @the_question}, {votes: @the_question.votes_for}]
+
+  end
+
 
   def create
     # binding.pry
