@@ -54,7 +54,8 @@ form.register{
 }
 
 .form_wrapper input[type="text"],
-.form_wrapper input[type="password"]{
+.form_wrapper input[type="password"],
+.form_wrapper input[type="email"]  {
     border: solid 1px #E5E5E5;
     margin: 5px 30px 0px 30px;
     padding: 9px;
