@@ -1,5 +1,5 @@
 <h1>Welcome to Woah.</h1>
-
+<!-- 
   <% if ! logged_in? %>
 
         <%= link_to "Sign up for an Account", new_user_path %><br>
@@ -13,18 +13,15 @@
         <%= link_to "Sign out of your account", session_path, :method => :delete %>
 
   <% end %>
+ -->
 
 
 
-
-
-
-<a href="#wheel" class="wheel-button">
-       <span>+</span>
-      </a>
-      <ul id="wheel" data-angle="all">
-        <li class="item"><a href="#">Home</a></li>
-        <li class="item"><a href="#">Questions</a></li>
-        <li class="item"><a href="#">Profile</a></li>
-        <li class="item"><a href="#">Logout</a></li>
-      </ul>
+<ul id="wheel" class="wheel" data-angle="all">
+  <li class= "item"><%= link_to "Home", root_path %></li>
+  <li class= "item"><%= link_to "Login", new_session_path %></li>
+  <li class= "item"><%= link_to "Sign Up", new_user_path %></li>
+  <li class= "item"><%= link_to "Question Bank", root_path %></li>
+  <li class="item"><%= link_to "Log Out", session_path, :method => :delete %></li>
+  <li class="item"><%= link_to "About", root_path %></li>
+</ul>

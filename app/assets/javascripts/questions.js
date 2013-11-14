@@ -39,7 +39,7 @@ function addList(){
 function appendQuestion(question) {
   console.log(question);
 
-  var colors = ["red", "blue", "goldenrod", "green"];
+  var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
   var outerDiv = $('<div class="item">');
 
   var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")

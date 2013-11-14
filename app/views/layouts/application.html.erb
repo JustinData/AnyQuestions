@@ -28,4 +28,24 @@
   </nav>
 <%= yield %>
 </body>
+
+<footer>
+
+<% if logged_in? #user is logged in %>
+        <br>
+        <br>
+        <br>
+        <br>
+        <%= "#{current_user.name} is currently logged in." %>
+
+<% else %>
+        <br>
+        <br>
+        <br>
+        <br>
+        <%= "No user is currently logged in." %>
+
+<% end %>
+
+</footer>
 </html>
