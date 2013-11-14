@@ -1,3 +1,4 @@
+<!-- begin signup form -->
 <% unless @user.errors.none? %>
   <% @user.errors.full_messages.each do |msg| %>
     <%= msg %>
@@ -5,11 +6,10 @@
 <% end %>
 
 <div id="form_wrapper" class="form_wrapper">
-<form class="register">
+<%= form_for @user, html: {class: "register", id: "register"} do |f| %>
   <h3>Register</h3>
   <div class="column">
     <div>
-<%= form_for @user do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
     </div>
@@ -29,9 +29,31 @@
     </div>
   <div>
   <div class="bottom">
-    <div class="remember">
-      <input type="checkbox">
-    </div>
   <%= f.submit %>
-<% end %>
+  <% end %>
+  <%= link_to "You have an account already? Log in here", new_session_path, class: 'linkform', rel: 'login' %>
+    <div class="clear"></div>
+    </div>
+  </div>
 </div>
+<!-- end signup form -->
+
+<!-- begin login form -->
+<%= form_tag session_path, :method => :post, id: 'login',
+ class: "login active" do %>
+  <h3>Login</h3>
+  <div>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
+  </div>
+  <div class="bottom">
+  <div>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+  </div>
+  <%= submit_tag "Login" %>
+  <%= link_to "You don't have an account yet? Register here", new_user_path, class: 'linkform' , rel: 'register'%>
+  <div class= "clear"></div>
+  </div>
+<% end %>
+<!-- end login form -->

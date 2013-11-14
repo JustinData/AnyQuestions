@@ -15,8 +15,8 @@
 //= require turbolinks
 //= require underscore
 //= require packery
-//= require draggabilly
 //= require wheelmenu 
+//= require animatedform
 
 $(function(){
   $(".wheel-button").wheelmenu({
@@ -27,12 +27,5 @@ $(function(){
 });
 })
 
-$(function(){
-  $(".rotator .rotate").textrotator({
-  animation: "fade",
-  separator: ",",
-  speed: 1300
-  });
-})
 
 
