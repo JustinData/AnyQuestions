@@ -55,10 +55,12 @@ color: black;
 -moz-transition: all 200ms ease-out;
 -o-transition: all 200ms ease-out;
 transition: all 200ms ease-out;
+}
 
 span.container {
   color: red;
 }
+
 footer {
   padding: 80px;
   float: left;
