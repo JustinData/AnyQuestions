@@ -33,7 +33,11 @@ class Json::QuestionsController < ApplicationController
 
   end
 
-  def answer
+  def answered
+    @the_question = Question.find(params[:id])
+    @the_question.answered = true
+    @the_question.save
+    render json: [{question: @the_question}]
   end
 
 

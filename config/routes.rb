@@ -32,7 +32,7 @@ Whoa::Application.routes.draw do
       end
 
       member do
-        post 'mark_answered'
+        post 'answered'
       end
 
       member do

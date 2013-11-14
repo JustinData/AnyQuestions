@@ -46,7 +46,7 @@ function controllerSetup(){
 
 function controllerBuildModel(serverResponse){
 	var numQuestions = serverResponse[0].questions.length;
-	// console.log("here")
+
 	for (var i = 0; i < numQuestions; i++){
 		var tempQuestion = new Question(serverResponse[0].questions[i].details, serverResponse[0].questions[i].user_id, serverResponse[0].questions[i].id);
 		roomQuestionList.addQuestion(tempQuestion);
@@ -80,14 +80,13 @@ function controllerUpdateVotes(serverResponse){
 };
 
 function controllerUpdateNewQuestion(serverResponse){
-	console.log(serverResponse);
 	tempQuestion = new Question(serverResponse.details, serverResponse.user_id, serverResponse.id);
 	roomQuestionList.addQuestion(tempQuestion);
 	viewRenderQuestion(tempQuestion);
+  viewRenderAnswerable(tempQuestion);
 };
 
 function viewRenderQuestion(question){
-	console.log(question);
 	var colors = ["red", "blue", "goldenrod", "green"];
 	var outerDiv = $('<div class="item">');
 
@@ -112,7 +111,6 @@ function viewRenderQuestion(question){
 }
 
 function viewRenderVotes(question){
-	// console.log("blah");
 	var myDiv = $('div[data-val=' + question.id + ']');
 	$(myDiv.children()[1]).html(question.votes);
 }
@@ -140,8 +138,6 @@ function viewFormListener(){
 }
 
 function controllerUpVote(){
-  console.log("updating the vote");
-
   var session_id = $('#session_id').text();
   var question_id = $(this.parentElement).data().val;
   var url = "/json/questions/" + question_id + "/vote_up";
@@ -161,8 +157,9 @@ function controllerUpVote(){
 
 // }
 
-function viewUpVoteListener(){
+function viewAddDelegatedListeners(){
   $('div.packery').on('click', 'div.upButton', controllerUpVote);
+  $('div.packery').on('click', 'div.answerable', controllerAnswer);
 };
 
 
@@ -176,14 +173,57 @@ function controllerAnswerableSetup(){
     data: { question: {id: roomQuestionList.questions[i].id}},
       success: controllerUpdateAnswerable
       });
-
   };
 };
 
 function controllerUpdateAnswerable(serverResponse){
-  console.log(serverResponse);
+  //TODO: dry this up into a helper function aka controllerHelperMap(serverResponse)
+  var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });
+  var index = $.inArray(serverResponse[0].question.id, tempArray);
+
+  // roomQuestionList.questions[index].votes = serverResponse[1].votes;
+  viewRenderAnswerable(roomQuestionList.questions[index]);
 };
 
+function viewRenderAnswerable(question){
+  var myDiv = $('div[data-val=' + question.id + ']');
+  var answerableDiv = $("<div class=answerable>&radic;</div>");
+
+  $(myDiv.children()[1]).append(answerableDiv);
+}
+
+function controllerAnswer(){
+  console.log("this question was just answered!");
+  // now go tell the server this question was answered!
+  // TODO - this is one level higher than vote because of the nesting
+  // that is happening - it shouldn't be.
+  var question_id = $(this.parentElement.parentElement).data().val;
+
+  var url = "/json/questions/" + question_id + "/answered";
+
+  $.ajax({
+      url: url,
+      type: "POST",
+      data: { question: {id: question_id}},
+      success: controllerUpdateAnswer
+    });
+};
+
+function controllerUpdateAnswer(serverResponse){
+  
+  //remove from the model - find it in the model.  then mark it answered
+  var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });
+  var index = $.inArray(serverResponse[0].question.id, tempArray);
+  roomQuestionList.questions[index].answer();
+
+  //remove from the dom
+  viewRemoveQuestion(roomQuestionList.questions[index]);
+}
+
+function viewRemoveQuestion(question){
+  var myDiv = $('div[data-val=' + question.id + ']');
+  myDiv.remove();
+}
 
 window.onload = function(){
 	
@@ -191,7 +231,7 @@ window.onload = function(){
  
 
 	viewFormListener();
-	viewUpVoteListener();
+	viewAddDelegatedListeners();
 
   
 
