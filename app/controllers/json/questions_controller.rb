@@ -1,19 +1,25 @@
 class Json::QuestionsController < ApplicationController
-  
+
+# namespaced json controller to handle all the ajax requests from the page 
+
+  #build the room from all of the current unanswered rooms - from a page refresh.
   def index
-    @questions = Question.order("created_at ASC").all
+    #@questions = Question.order("created_at ASC").all
     @unanswered_questions = Question.where("answered = false").plusminus_tally
-    @user_id = session[:user_id]
-    # binding.pry
+    #@user_id = session[:user_id]
     render json: [{questions: @unanswered_questions}] and return
-    
   end
 
+  #GET json/question/:id/getvotes
+  #find out all the votes a certain question has
   def getvotes
     @the_question = Question.find(params[:id])
     render json: [{question: @the_question}, {votes: @the_question.votes_for}] and return
   end
 
+  #POST json/question/:id/vote_up
+  #vote for the question using thumbs_up method.
+  #TODO: should return something else if error.
   def vote_up
     current_user = User.find(session[:user_id])
     @the_question = Question.find(params[:id])
@@ -23,6 +29,9 @@ class Json::QuestionsController < ApplicationController
     render json: [{question: @the_question}, {votes: @the_question.votes_for}]
   end
 
+  #GET json/question/:id/getanswerable
+  #find out if the user who is logged in can answer this particular question.
+  #TODO: add in verification for Teacher Role
   def getanswerable
     @the_question = Question.find(params[:id])
     @user_id = session[:user_id]
@@ -30,9 +39,10 @@ class Json::QuestionsController < ApplicationController
     if @the_question.user.id == @user_id
       render json: [{question: @the_question}]
     end
-
   end
 
+  #POST json/question/:id/answered
+  #make the question answered, save it, return it as json obj.
   def answered
     @the_question = Question.find(params[:id])
     @the_question.answered = true
@@ -41,8 +51,8 @@ class Json::QuestionsController < ApplicationController
   end
 
 
+  #create a new question, save it, return it as a json obj.
   def create
-    # binding.pry
     @question = Question.new(question_params)
 
     if @question.save
