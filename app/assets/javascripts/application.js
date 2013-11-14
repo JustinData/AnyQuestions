@@ -25,6 +25,3 @@ $(function(){
   angle: "all", // Angle which the menu will appear. Can be "all", "N", "NE", "E", "SE", "S", "SW", "W", "NW", or even array [0, 360]. Default: "all" or [0, 360]
 });
 })
-
-
-

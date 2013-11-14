@@ -30,6 +30,19 @@ Whoa::Application.routes.draw do
       member do
         post :vote_up
       end
+
+      member do
+        post 'answered'
+      end
+
+      member do
+        get :getvotes
+      end
+
+      member do
+        get :getanswerable
+      end
+
     end
 
   end

@@ -1,17 +1,16 @@
-//TODO make it into a model
 
-$(function(){
-  addList();
+// $(function(){
+//   addList();
 
-  /* UI for rolling up container */
-  toggleList();
+//   /* UI for rolling up container */
+//   toggleList();
 
-  /* set up delegated listener for upvotes */
-  // delegated listener: $('#game').on('click', 'div.column', cardClick);
-  //$('div.item').on('click', 'img.upButton', upVoteClick);
-  $('div.packery').on('click', 'div.upButton', upVoteClick);
+//   /* set up delegated listener for upvotes */
+//   // delegated listener: $('#game').on('click', 'div.column', cardClick);
+//   //$('div.item').on('click', 'img.upButton', upVoteClick);
+//   $('div.packery').on('click', 'div.upButton', upVoteClick);
 
-});
+// });
  
 function addList(){
   var input;
@@ -40,11 +39,11 @@ function addList(){
 function appendQuestion(question) {
   console.log(question);
 
-  var colors = ["red", "blue", "goldenrod", "green"];
+  var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
   var outerDiv = $('<div class="item">');
 
   var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
-  innerDiv.text(question.details + " posted by User " + question.user_id);
+  innerDiv.text(question.details + " posted by User " + question.user.name_id);
   innerDiv.css("background", _.sample(colors));
 
   // build the upvote button & attach it to the inner div

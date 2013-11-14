@@ -1,5 +1,7 @@
 <!-- making the javascript specific to this controller to avoid scope problems  -->
 <%= javascript_include_tag params[:controller] %>
+<%= javascript_include_tag "questions_model" %>
+<!-- <script type="text/javascript" src="questions_model.js"></script> -->
 
 <h1 class="questions">Woah <span class="dot">+</span></h1>
 
@@ -18,21 +20,20 @@
   </div>
 
   <div class="packery">
-    <% @unanswered_questions.each do |question| %>
+   <!--  <% @unanswered_questions.each do |question| %>
       <div class="item">
         <div class="item-content" data-val="<%= question.id%>">
         <%= question.details %>" posted by User        
-        
         <div class="upButton">&oplus;</div>
         <div class=votesDiv><%= question.votes_for %></div>
         
-       <% if (@current_user.teacher == true) || (question.user.id == session[:user_id]) %>
+       <% if (@current_user.teacher == true) || (question.user_id == session[:user_id]) %>
 			   <%= button_to 'Answered', mark_answered_question_path(question[:id]), method: 'post' %>
     	  <% end %>
 
         </div>
       </div>
-    <% end %>
+    <% end %> -->
   </div>
 
 </div>
