@@ -1,30 +1,36 @@
-<h1>Welcome to Woah.</h1>
+<!-- about Whoa. -->
+<div class="container">
+<h1 class="border">Whoa<span class="container"><span class="dot">+</span> Better questions, better answers.</h1>
 
-  <% if ! logged_in? %>
+<h3>Whoa is a simple real-time classroom Q &amp; A tool that enables students to post and vote for questions.<br>Teachers can then identify questions to address on-the-spot, taking into account their popularity.
+</h3>
+</div>
+<!-- end of about Whoa! -->
 
-        <%= link_to "Sign up for an Account", new_user_path %><br>
-
-        <%= link_to "Sign in to your account", new_session_path %><br>
-
-  <% else %>
-
-        <%= link_to "Go to your page!", user_path( current_user ) %><br>
-
-        <%= link_to "Sign out of your account", session_path, :method => :delete %>
-
-  <% end %>
-
-
-
-
-
-
+<div class="main">
 <a href="#wheel" class="wheel-button">
-       <span>+</span>
-      </a>
-      <ul id="wheel" data-angle="all">
-        <li class="item"><a href="#">Home</a></li>
-        <li class="item"><a href="#">Questions</a></li>
-        <li class="item"><a href="#">Profile</a></li>
-        <li class="item"><a href="#">Logout</a></li>
-      </ul>
+  <span>+</span>
+</a>
+ <div class="pointer">Hover me</div>
+<ul id="wheel" class="wheel" data-angle="all">
+  <li class="item"><a href="#">Home</a></li>
+  <li class="item"><a href="#home">Login</a></li>
+  <li class="item"><a href="#home">Sign Up</a></li>
+  <li class="item"><a href="#home">Questions</a></li><li class="item"><a href="#home">Log Out</a></li>
+  <li class="item"><a href="#home">Contact Us</a></li>
+</ul>
+</div>
+</div>
+<% if logged_in? %>
+<div class="btns">
+  <a class="reload btn" href="#">Sign In</a>
+<% end %>   
+<% if !logged_in? %>
+<div class="btns">
+<p><a class="btns" href="https://github.com/nicholalexander/project2" target="_blank">+ On GitHub</a>
+<% end %>
+</div>
+<h1 class="border"></h1>
+<footer>
+<p class="back">By Team inJEANius {Justin,  Erica, Aby, Nichol} of the WDI September Array class.</p>
+</footer>

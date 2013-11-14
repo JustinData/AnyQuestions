@@ -16,3 +16,23 @@
 //= require underscore
 //= require packery
 //= require draggabilly
+//= require wheelmenu 
+
+$(function(){
+  $(".wheel-button").wheelmenu({
+  trigger: "hover", // Can be "click" or "hover". Default: "click"
+  animation: "fly", // Entrance animation. Can be "fade" or "fly". Default: "fade"
+  animationSpeed: "fast", // Entrance animation speed. Can be "instant", "fast", "medium", or "slow". Default: "medium"
+  angle: "all", // Angle which the menu will appear. Can be "all", "N", "NE", "E", "SE", "S", "SW", "W", "NW", or even array [0, 360]. Default: "all" or [0, 360]
+});
+})
+
+$(function(){
+  $(".rotator .rotate").textrotator({
+  animation: "fade",
+  separator: ",",
+  speed: 1300
+  });
+})
+
+

@@ -1,111 +1,86 @@
 html {
-  font-size: 16px;
+height: 100%;
+}
+
+h1.border {
+  border-bottom: 5px solid black;
+  font-size: 3em;
+}
+
+span.dot {
+  color: red;
+  font-size: .5em;
+}
+a.btns {
+display: inline-block;
+border: 2px solid #000;
+padding: 1em 1.25em;
+font-weight: 500;
+text-transform: uppercase;
+letter-spacing: 3px;
+text-decoration: none;
+cursor: pointer;
+width: 150px;
+height: 1.5em;
+line-height: 1.3em;
+background: #000;
+color: #fff;
 }
 
 body {
-      background: #f4eedf;
-      padding: 0;
-      font-family: 'open sans';
-      position: relative;
-      margin: 0
-    }
-
-.hello-bar {
-  color: #82826e;
-  font-size: 1.6em;
-  font-weight: bold;
-  text-align: center;
-  background: #e4e5c9 url(../imgs/hello-bar-bg.png) no-repeat 35px 13px;
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .54);
-  width: 100%;
-  height: 49px;
-  position: relative;
+background: #f4eedf;
+padding: 50px;
+position: relative;
+height: 100%;
 }
 
-.hello-bar:before,
-.hello-bar:after {
-  content: "";
-  display: table;
-  list-style:none;
-  background-image:none;
-  background-repeat:none;
-  background-position:0; 
+.back {
+text-align: center;
+display: block;
+padding: 20px;
+width: 100%;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+background: rgba(0, 0, 0, 0.05);
+font-weight: bold;
+font-size: 1em;
+color: black;
+-webkit-transition: all 200ms ease-out;
+-moz-transition: all 200ms ease-out;
+-o-transition: all 200ms ease-out;
+transition: all 200ms ease-out;
+
+span.container {
+  color: red;
+}
+footer {
+  padding: 80px;
+  float: left;
 }
 
-.hello-bar:after {
-  clear: both;
+h1.container {
+  font-size: 3em;
 }
 
-.hello-bar {
-  zoom: 1;
-  list-style:none;
-  background-image:none;
-  background-repeat:none;
-  background-position:0; 
-}
+a {
+text-decoration: none;
 
-.hello-bar ul {
-    width: 695px;
-    margin: 11px;
-    list-style-type:none;
-    padding:2px;
-}
-
-    .hello-bar li {
-      line-height: 28px;
-      float: left;
-      font-style: bold;
-      margin: 5px;
-      padding: 5px;
-    }
-
-  .hello-bar .close {
-    text-indent: -9999em;
-    background: url(../imgs/hello-bar-close.png) no-repeat top left;
-    width: 21px;
-    height: 21px;
-    position: absolute;
-    top: 15px; right: 15px;
-  }
-
-  .hello-bar .close:hover {
-    background-position: bottom left;
-  }
-
-.hello-bar-hidden .hello-bar {
-  display: none;
-}
-
-.hello-bar-hidden .logo a, .grid {
-  margin-top: 0;
-}
-
-.hello-bar-hidden .categories-panel, .breadcrumbs-search {
-  top: 0;
-}
-
-.hello-bar-hidden .grid {
-  margin: 0;
-}
-
-.hello-bar-hidden #category-parents {
-  top: 62px;
-}
-
-
-span {
-    color: red;
-}
- 
 li.nav {
   display: inline;
 }
+
+a.btns {
+}
+
+
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
 
+/* css for the packery feature 
 .packery {
   background: #FDD;
   background: hsla(45, 100%, 40%, 0.2);
@@ -158,3 +133,4 @@ li.nav {
 }
 
 
+*/
