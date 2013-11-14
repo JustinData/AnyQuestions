@@ -146,13 +146,13 @@ function upVoteClick (){
 }
 
 //i need to get the votes AND the question id
-function updateVotes(server_response){
-  console.log(server_response);
+// function updateVotes(server_response){
+//   console.log(server_response);
 
-  server_response[0].question.id;
-  server_response[1].votes;
+//   server_response[0].question.id;
+//   server_response[1].votes;
   
-  var myDiv = $('div[data-val=' + server_response[0].question.id + ']');
-  $(myDiv.children()[1]).html(server_response[1].votes);
+//   var myDiv = $('div[data-val=' + server_response[0].question.id + ']');
+//   $(myDiv.children()[1]).html(server_response[1].votes);
 
-}
+// }

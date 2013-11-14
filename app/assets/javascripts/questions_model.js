@@ -1,3 +1,6 @@
+var roomQuestionList = new QuestionList();
+
+
 // Question object
 function Question(q, uId, qId) {
 	this.details = q;
@@ -42,12 +45,15 @@ function controllerSetup(){
 };
 
 function controllerBuildModel(serverResponse){
-	console.log(serverResponse);
 	var numQuestions = serverResponse[0].questions.length;
+	console.log("here")
 	for (var i = 0; i < numQuestions; i++){
 		var tempQuestion = new Question(serverResponse[0].questions[i].details, serverResponse[0].questions[i].user_id, serverResponse[0].questions[i].id);
 		roomQuestionList.addQuestion(tempQuestion);
+		viewRenderQuestion(tempQuestion);
 	};
+	controllerVoteSetup();
+
 };
 
 function controllerVoteSetup(){
@@ -70,14 +76,46 @@ function controllerUpdateVotes(serverResponse){
 	var index = $.inArray(serverResponse[0].question.id, tempArray);
 
 	roomQuestionList.questions[index].votes = serverResponse[1].votes;
-	console.log(serverResponse);
+	viewRenderVotes(roomQuestionList.questions[index])
 };
 
-window.onLoad = function(){
+function viewRenderQuestion(question){
+	console.log(question);
+	var colors = ["red", "blue", "goldenrod", "green"];
+	var outerDiv = $('<div class="item">');
+
+	var innerDiv = $("<div class='item-content' data-val=" + question.questionId + ">")
+	innerDiv.text(question.details);
+	innerDiv.css("background", _.sample(colors));
+
+	// build the upvote button & attach it to the inner div
+	var upButton = $('<div class="upButton">&oplus;</div>');
+	innerDiv.append(upButton);
+
+	//build the votes div
+	var votesDiv = $("<div class=votesDiv>0</div>")
+	innerDiv.append(votesDiv);
+
+
+
+	//append the div with the new question.
+	outerDiv.append(innerDiv);
+	$('div.packery').append(outerDiv);
+	pckry.appended( outerDiv[0] );
+}
+
+function viewRenderVotes(question){
+	console.log("blah");
+	var myDiv = $('div[data-val=' + question.questionId + ']');
+	$(myDiv.children()[1]).html(question.votes);
+}
+
+window.onload = function(){
 	console.log("onload");
-	var roomQuestionList = new QuestionList();
+	
 	
 	controllerSetup();
+	
 
 };
 //===============================
