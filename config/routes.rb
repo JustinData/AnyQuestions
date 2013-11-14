@@ -38,6 +38,11 @@ Whoa::Application.routes.draw do
       member do
         get :getvotes
       end
+
+      member do
+        get :getanswerable
+      end
+
     end
 
   end

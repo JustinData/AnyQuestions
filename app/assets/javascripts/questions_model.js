@@ -53,7 +53,7 @@ function controllerBuildModel(serverResponse){
 		viewRenderQuestion(tempQuestion);
 	};
 	controllerVoteSetup();
-
+  controllerAnswerableSetup();
 };
 
 function controllerVoteSetup(){
@@ -163,14 +163,36 @@ function controllerUpVote(){
 
 function viewUpVoteListener(){
   $('div.packery').on('click', 'div.upButton', controllerUpVote);
-}
+};
+
+
+function controllerAnswerableSetup(){
+  var numQuestions = roomQuestionList.questions.length;
+  for (var i = 0; i < numQuestions; i++){
+
+    $.ajax({
+    url: "/json/questions/" + roomQuestionList.questions[i].id + "/getanswerable",
+    type: "GET",
+    data: { question: {id: roomQuestionList.questions[i].id}},
+      success: controllerUpdateAnswerable
+      });
+
+  };
+};
+
+function controllerUpdateAnswerable(serverResponse){
+  console.log(serverResponse);
+};
+
 
 window.onload = function(){
 	
 	controllerSetup();
+ 
 
 	viewFormListener();
 	viewUpVoteListener();
+
   
 
 };

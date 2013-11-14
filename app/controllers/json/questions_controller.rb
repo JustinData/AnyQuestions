@@ -15,14 +15,25 @@ class Json::QuestionsController < ApplicationController
   end
 
   def vote_up
-
     current_user = User.find(session[:user_id])
     @the_question = Question.find(params[:id])
 
     current_user.vote_for(@the_question)
   
     render json: [{question: @the_question}, {votes: @the_question.votes_for}]
+  end
 
+  def getanswerable
+    @the_question = Question.find(params[:id])
+    @user_id = session[:user_id]
+    
+    if @the_question.user.id == @user_id
+      render json: [{question: @the_question}]
+    end
+
+  end
+
+  def answer
   end
 
 
