@@ -87,8 +87,10 @@ function viewRemoveQuestion(question){
 
 //display how many votes the question has
 function viewRenderVotes(question){
-  var myDiv = $('div[data-val=' + question.id + ']');
-  $(myDiv.children()[1]).html(question.votes);
+  // var myDiv = $('div[data-val=' + question.id + ']');
+  // $(myDiv.children()[1]).html(question.votes);
+  // More precise selection of votes div.
+  $('div[data-val=' + question.id + '] .votesDiv')[0].html(question.votes);
 }
 
 //add a listener to the form to allow new questions to be created
