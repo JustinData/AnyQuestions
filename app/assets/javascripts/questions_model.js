@@ -307,8 +307,7 @@ function viewToggleList() {
 }
 
 function timedRefresh(timeoutPeriod) {
-
-  var answerTO = timeoutPeriod + 2000;
+  var answerTO = timeoutPeriod + 100;
   setTimeout(redisplay, timeoutPeriod);
   setTimeout(controllerAnswerableSetup, answerTO);
 }
@@ -321,6 +320,6 @@ window.onload = function(){
   viewAddDelegatedListeners();
   
   viewToggleList();
-  timedRefresh(10000);
+  timedRefresh(500);
 
 };
