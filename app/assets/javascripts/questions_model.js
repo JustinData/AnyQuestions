@@ -58,7 +58,7 @@ function viewRenderAnswerable(question){
 
 //render a question
 function viewRenderQuestion(question){
-  var colors = ["red", "blue", "goldenrod", "green"];
+  var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
   var outerDiv = $('<div class="item">');
 
   var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
@@ -172,6 +172,7 @@ function controllerUpdateVotes(serverResponse){
 	roomQuestionList.questions[index].votes = serverResponse[1].votes;
   roomQuestionList.sort;
 	viewRenderVotes(roomQuestionList.questions[index]);
+  redisplay();
 };
 
 //the hander that accepts the response from sending a new question.
@@ -212,10 +213,11 @@ function controllerAnswerableSetup(){
 
 //the server has decided i can answer this - so render an answer button.
 function controllerUpdateAnswerable(serverResponse){
+  console.log("in controllerUpdateAnswerable");
   //TODO: dry this up into a helper function aka controllerHelperMap(serverResponse)
   var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });
   var index = $.inArray(serverResponse[0].question.id, tempArray);
-
+  console.log(roomQuestionList.questions[index]);
   viewRenderAnswerable(roomQuestionList.questions[index]);
 };
 
@@ -247,6 +249,63 @@ function controllerUpdateAnswer(serverResponse){
   //remove from the dom
   viewRemoveQuestion(roomQuestionList.questions[index]);
 }
+
+//////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////
+
+
+
+function redisplay(){
+  //delete this shit.
+  elems = pckry.getItemElements();
+  for (var i=0; i<elems.length; i++){
+    pckry.remove(elems[i]);
+  }
+
+  //sort local model
+  roomQuestionList.sort();
+
+
+  //build this shit.
+  numberOfQuestions = roomQuestionList.questions.length;
+  for(var i=0; i<numberOfQuestions; i++){
+    var question = roomQuestionList.questions[i];
+
+    var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
+    var outerDiv = $('<div class="item">');
+
+    var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
+    innerDiv.text(question.details);
+    innerDiv.css("background", _.sample(colors));
+
+    // build the upvote button & attach it to the inner div
+    var upButton = $('<div class="upButton">&oplus;</div>');
+    innerDiv.append(upButton);
+
+    //build the votes div
+    var votesDiv = $("<div class=votesDiv>"+question.votes+"</div>")
+    innerDiv.append(votesDiv);
+
+    //append the div with the new question.
+    outerDiv.append(innerDiv);
+
+    $('div.packery').append(outerDiv);
+    pckry.prepended( outerDiv );
+  };
+
+  controllerAnswerableSetup(); 
+};
+
+
+
+
+
+
 
 window.onload = function(){
 	
