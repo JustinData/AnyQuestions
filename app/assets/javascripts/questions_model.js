@@ -61,7 +61,7 @@ function viewRenderQuestion(question){
   var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
   var outerDiv = $('<div class="item">');
 
-  var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
+  var innerDiv = $("<div class='item-content' data-val=" + question.id + ">");
   innerDiv.text(question.details);
   innerDiv.css("background", _.sample(colors));
 
@@ -70,7 +70,7 @@ function viewRenderQuestion(question){
   innerDiv.append(upButton);
 
   //build the votes div
-  var votesDiv = $("<div class=votesDiv>0</div>")
+  var votesDiv = $("<div class=votesDiv>0</div>");
   innerDiv.append(votesDiv);
 
   //append the div with the new question.
@@ -172,7 +172,7 @@ function controllerUpdateVotes(serverResponse){
 	roomQuestionList.questions[index].votes = serverResponse[1].votes;
   roomQuestionList.sort;
 	viewRenderVotes(roomQuestionList.questions[index]);
-  redisplay();
+  //redisplay();
 };
 
 //the hander that accepts the response from sending a new question.
@@ -213,11 +213,10 @@ function controllerAnswerableSetup(){
 
 //the server has decided i can answer this - so render an answer button.
 function controllerUpdateAnswerable(serverResponse){
-  console.log("in controllerUpdateAnswerable");
   //TODO: dry this up into a helper function aka controllerHelperMap(serverResponse)
   var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });
   var index = $.inArray(serverResponse[0].question.id, tempArray);
-  console.log(roomQuestionList.questions[index]);
+
   viewRenderAnswerable(roomQuestionList.questions[index]);
 };
 
@@ -279,25 +278,23 @@ function redisplay(){
     var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
     var outerDiv = $('<div class="item">');
 
-    var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
+    var innerDiv = $("<div class='item-content' data-val=" + question.id + ">");
     innerDiv.text(question.details);
 
-    if(question.votes > 5){
+    if (question.votes > 5) {
       innerDiv.css("background", "red");
-    } else if ((question.votes > 3) || (question.votes < 5)) {
+    } else if ((question.votes > 3) && (question.votes < 5)) {
       innerDiv.css("background", "yellow");    
     } else if (question.votes <= 3) {
       innerDiv.css("background", "green");
-    };
-
-    
+    }
 
     // build the upvote button & attach it to the inner div
     var upButton = $('<div class="upButton">&oplus;</div>');
     innerDiv.append(upButton);
 
     //build the votes div
-    var votesDiv = $("<div class=votesDiv>"+question.votes+"</div>")
+    var votesDiv = $("<div class=votesDiv>"+question.votes+"</div>");
     innerDiv.append(votesDiv);
 
     //append the div with the new question.
@@ -307,12 +304,22 @@ function redisplay(){
     pckry.prepended( outerDiv );
   };
 
-  controllerAnswerableSetup(); 
+  //should we remove answerable here?
+  setTimeout(controllerAnswerableSetup(),200);
 };
+
+function viewToggleList() {
+  $("p").hide();
+  $("h1").click(function() {
+    $(this).next().slideToggle(300);
+  });
+}
 
 
 function timedRefresh(timeoutPeriod) { 
-  setTimeout("location.reload(true);",timeoutPeriod);
+  var answerTO = timeoutPeriod + 2000;
+  setTimeout(redisplay,timeoutPeriod);
+  setTimeout(controllerAnswerableSetup, answerTO);
 };
 
 window.onload = function(){
@@ -321,7 +328,8 @@ window.onload = function(){
   
 	viewFormListener();
 	viewAddDelegatedListeners();
-
-  timedRefresh(20000);
+  
+  viewToggleList();
+  //timedRefresh(30000);
 
 };
