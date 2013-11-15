@@ -281,7 +281,16 @@ function redisplay(){
 
     var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
     innerDiv.text(question.details);
-    innerDiv.css("background", _.sample(colors));
+
+    if(question.votes > 5){
+      innerDiv.css("background", "red");
+    } else if ((question.votes > 3) || (question.votes < 5)) {
+      innerDiv.css("background", "yellow");    
+    } else if (question.votes <= 3) {
+      innerDiv.css("background", "green");
+    };
+
+    
 
     // build the upvote button & attach it to the inner div
     var upButton = $('<div class="upButton">&oplus;</div>');
@@ -302,10 +311,9 @@ function redisplay(){
 };
 
 
-
-
-
-
+function timedRefresh(timeoutPeriod) { 
+  setTimeout("location.reload(true);",timeoutPeriod);
+};
 
 window.onload = function(){
 	
@@ -313,5 +321,7 @@ window.onload = function(){
   
 	viewFormListener();
 	viewAddDelegatedListeners();
+
+  timedRefresh(20000);
 
 };
