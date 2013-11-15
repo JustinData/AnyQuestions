@@ -271,11 +271,11 @@ function redisplay(){
     var innerDiv = $("<div class='item-content' data-val=" + question.id + ">");
     innerDiv.text(question.details);
 
-    if (question.votes > 5) {
+    if (question.votes >= 5) {
       innerDiv.css("background", "red");
-    } else if ((question.votes > 3) && (question.votes < 5)) {
+    } else if ((question.votes >= 3) && (question.votes < 5)) {
       innerDiv.css("background", "yellow");    
-    } else if (question.votes <= 3) {
+    } else if (question.votes < 2) {
       innerDiv.css("background", "green");
     }
 
