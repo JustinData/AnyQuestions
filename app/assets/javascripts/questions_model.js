@@ -61,7 +61,7 @@ function viewRenderQuestion(question){
   var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
   var outerDiv = $('<div class="item">');
 
-  var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
+  var innerDiv = $("<div class='item-content' data-val=" + question.id + ">");
   innerDiv.text(question.details);
   innerDiv.css("background", _.sample(colors));
 
@@ -70,7 +70,7 @@ function viewRenderQuestion(question){
   innerDiv.append(upButton);
 
   //build the votes div
-  var votesDiv = $("<div class=votesDiv>0</div>")
+  var votesDiv = $("<div class=votesDiv>0</div>");
   innerDiv.append(votesDiv);
 
   //append the div with the new question.
@@ -278,7 +278,7 @@ function redisplay(){
     var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
     var outerDiv = $('<div class="item">');
 
-    var innerDiv = $("<div class='item-content' data-val=" + question.id + ">")
+    var innerDiv = $("<div class='item-content' data-val=" + question.id + ">");
     innerDiv.text(question.details);
 
     if(question.votes > 5){
@@ -294,7 +294,7 @@ function redisplay(){
     innerDiv.append(upButton);
 
     //build the votes div
-    var votesDiv = $("<div class=votesDiv>"+question.votes+"</div>")
+    var votesDiv = $("<div class=votesDiv>"+question.votes+"</div>");
     innerDiv.append(votesDiv);
 
     //append the div with the new question.
