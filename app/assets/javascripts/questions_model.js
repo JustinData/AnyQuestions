@@ -285,9 +285,9 @@ function redisplay(){
       innerDiv.css("background", "red");
     } else if ((question.votes > 3) && (question.votes < 5)) {
       innerDiv.css("background", "yellow");    
-    } else (question.votes <= 3) {
+    } else if (question.votes <= 3) {
       innerDiv.css("background", "green");
-    };
+    }
 
     // build the upvote button & attach it to the inner div
     var upButton = $('<div class="upButton">&oplus;</div>');
@@ -326,7 +326,8 @@ window.onload = function(){
   
 	viewFormListener();
 	viewAddDelegatedListeners();
+  
   viewToggleList();
-  //timedRefresh(30000);
+  timedRefresh(30000);
 
 };

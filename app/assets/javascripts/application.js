@@ -16,6 +16,7 @@
 //= require packery
 //= require wheelmenu 
 //= require animatedform
+//= require questions_model.js
 
 $(function(){
   $(".wheel-button").wheelmenu({
