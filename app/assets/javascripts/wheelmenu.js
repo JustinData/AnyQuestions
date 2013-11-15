@@ -67,7 +67,7 @@
       d += 15;
     }).promise().done( function() {
       el.removeClass("active").css("visibility", "hidden").hide();
-      button.removeClass("active")
+      button.removeClass("active");
     });
   }
   
@@ -87,7 +87,7 @@
       
       d += settings.animationSpeed[0];
     });
-  }
+  };
   
   $.fn.fadeOutIcon = function (el, button) {
     var d = 0;
@@ -98,24 +98,24 @@
       d += 15;
     }).promise().done( function() {
       el.removeClass("active").css("visibility", "hidden").hide();
-      button.removeClass("active")
+      button.removeClass("active");
     });
-  }
+  };
   
   $.fn.hideIcon = function (button, settings) {
     var fields = this.find(".item"),
         el = this;
     switch (settings.animation) { 
       case 'fade': 
-        fields.fadeOutIcon(el, button)
+        fields.fadeOutIcon(el, button);
         break; 
     
       case 'fly': 
-        fields.flyOut(el, button)
+        fields.flyOut(el, button);
         break; 
     }
     
-  }
+  };
   
   $.fn.showIcon = function (button, settings) {
     var el = this,
@@ -152,15 +152,15 @@
      
       switch (settings.animation) { 
         case 'fade': 
-          fields.fadeInIcon(el, button, width, height, angle, step, radius, settings)
+          fields.fadeInIcon(el, button, width, height, angle, step, radius, settings);
           break; 
           
         case 'fly': 
-          fields.flyIn(el, button, width, height, angle, step, radius, settings)
+          fields.flyIn(el, button, width, height, angle, step, radius, settings);
           break; 
       }
     
-  }
+  };
   
   $.fn.animateRotate = function(angle, duration, easing, complete) {
       return this.each(function() {
@@ -181,44 +181,44 @@
   
   
   function predefineAngle (settings) {
-    var convert = false
+    var convert = false;
     if ($.type(settings.angle) == "string") {
       try {
-        if (eval(settings.angle).length > 1) convert = true
+        if (eval(settings.angle).length > 1) convert = true;
       }
       catch(err) {
-        convert = false
+        convert = false;
       }
-      if (convert == true) {
+      if (convert === true) {
         settings.angle = JSON.parse(settings.angle);
       } else {
         switch (settings.angle) { 
           case 'N':
-            settings.angle = [180,380]
+            settings.angle = [180,380];
             break;
           case 'NE':
-            settings.angle = [270,380]
+            settings.angle = [270,380];
             break;
           case 'E':
-            settings.angle = [270,470]
+            settings.angle = [270,470];
             break;
           case 'SE':
-            settings.angle = [360,470]
+            settings.angle = [360,470];
             break;
           case 'S':
-            settings.angle = [360,560]
+            settings.angle = [360,560];
             break;
           case 'SW':
-            settings.angle = [90,200]
+            settings.angle = [90,200];
             break;
           case 'W':
-            settings.angle = [90,290]
+            settings.angle = [90,290];
             break;
           case 'NW':
-            settings.angle = [180,290]
+            settings.angle = [180,290];
             break;
           case 'all':
-            settings.angle = [0,360]
+            settings.angle = [0,360];
             break;
         }
       } 
@@ -230,16 +230,16 @@
     if ($.type(settings.animationSpeed) == "string") { 
       switch (settings.animationSpeed) { 
         case 'slow':
-          settings.animationSpeed = [75,700]
+          settings.animationSpeed = [75,700];
           break;
         case 'medium':
-          settings.animationSpeed = [50,500]
+          settings.animationSpeed = [50,500];
           break;
         case 'fast':
-          settings.animationSpeed = [25,250]
+          settings.animationSpeed = [25,250];
           break;
         case 'instant':
-          settings.animationSpeed = [0,0]
+          settings.animationSpeed = [0,0];
           break;
       }
     }
@@ -252,13 +252,13 @@
     settings = predefineSpeed(settings);
     
     return this.each(function(){
-      var button = $(this)
+      var button = $(this);
       var el = $($(this).attr("href"));
       el.addClass("wheel");
       
       button.css("opacity", 0).animate({
         opacity: 1
-      })
+      });
       if (settings.trigger == "hover") {
 
         button.bind({
@@ -283,7 +283,6 @@
         });
       }
     });
-  }
+  };
   
 }(window.jQuery);
-
