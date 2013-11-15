@@ -23,13 +23,13 @@
 <% if logged_in? #user is logged in %>
         <br>
         <br>
-        <br>
-        <br>
-        <%= "#{current_user.name} is currently logged in." %>
+        <%= "#{current_user.name} is currently logged in." %><br>
+        <% if current_user.name != current_user.teacher %>
+          <%= "#{current_user.name} is not a teacher." %>
+        <% end %>
+        <%= "#{current_user.votes}" %>
 
 <% else %>
-        <br>
-        <br>
         <br>
         <br>
         <%= "No user is currently logged in." %>
