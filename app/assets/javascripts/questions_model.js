@@ -172,7 +172,7 @@ function controllerUpdateVotes(serverResponse){
 	roomQuestionList.questions[index].votes = serverResponse[1].votes;
   roomQuestionList.sort;
 	viewRenderVotes(roomQuestionList.questions[index]);
-  redisplay();
+  //redisplay();
 };
 
 //the hander that accepts the response from sending a new question.
@@ -305,7 +305,7 @@ function redisplay(){
   };
 
   //should we remove answerable here?
-  //controllerAnswerableSetup(); 
+  controllerAnswerableSetup(); 
 };
 
 function viewToggleList() {
@@ -317,7 +317,7 @@ function viewToggleList() {
 
 
 function timedRefresh(timeoutPeriod) { 
-  setTimeout("location.reload(true);",timeoutPeriod);
+  setTimeout(redisplay,timeoutPeriod);
 };
 
 window.onload = function(){
@@ -327,6 +327,6 @@ window.onload = function(){
 	viewFormListener();
 	viewAddDelegatedListeners();
   viewToggleList();
-  //timedRefresh(20000);
+  //timedRefresh(30000);
 
 };
