@@ -213,11 +213,10 @@ function controllerAnswerableSetup(){
 
 //the server has decided i can answer this - so render an answer button.
 function controllerUpdateAnswerable(serverResponse){
-  console.log("in controllerUpdateAnswerable");
   //TODO: dry this up into a helper function aka controllerHelperMap(serverResponse)
   var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });
   var index = $.inArray(serverResponse[0].question.id, tempArray);
-  console.log(roomQuestionList.questions[index]);
+
   viewRenderAnswerable(roomQuestionList.questions[index]);
 };
 
@@ -305,8 +304,16 @@ function redisplay(){
     pckry.prepended( outerDiv );
   };
 
-  controllerAnswerableSetup(); 
+  //should we remove answerable here?
+  //controllerAnswerableSetup(); 
 };
+
+function viewToggleList() {
+  $("p").hide();
+  $("h1").click(function() {
+    $(this).next().slideToggle(300);
+  });
+}
 
 
 function timedRefresh(timeoutPeriod) { 
@@ -319,7 +326,7 @@ window.onload = function(){
   
 	viewFormListener();
 	viewAddDelegatedListeners();
-
+  viewToggleList();
   //timedRefresh(20000);
 
 };
