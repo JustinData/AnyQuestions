@@ -19,3 +19,12 @@ This is a standard rails 4 application.
 
 ###Pivotal Tracker
 [ Pivotal Tracker Board ](https://www.pivotaltracker.com/s/projects/952350)
+
+###Links
+[GitHub Repo](http://github.com/nicholalexander/project2)
+[Heroku Deployment](http://intense-wildwood-7943.herokuapp.com/)
+
+[Aby GitHub](http://github.com/abzilla)
+[Erica GitHub](http://github.com/evobersi)
+[Justin GitHub](http://github.com/JustinGA)
+[Nichol GitHub](http://github.com/nicholalexander)
