@@ -13,6 +13,7 @@ GA WDI Project Number 2 - Team inGenius, App TBA
 
 ###Repo
 This is a standard rails 4 application.
+All of our project documents and deliverables are in ./projectfiles
 * Project Requirements - second_project_outline.md
 * Project Proposal - project_proposal_woah.md
 
@@ -24,7 +25,3 @@ This is a standard rails 4 application.
 [GitHub Repo](http://github.com/nicholalexander/project2)
 [Heroku Deployment](http://intense-wildwood-7943.herokuapp.com/)
 
-[Aby GitHub](http://github.com/abzilla)
-[Erica GitHub](http://github.com/evobersi)
-[Justin GitHub](http://github.com/JustinGA)
-[Nichol GitHub](http://github.com/nicholalexander)
