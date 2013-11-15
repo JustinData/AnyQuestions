@@ -322,6 +322,6 @@ window.onload = function(){
 	viewFormListener();
 	viewAddDelegatedListeners();
 
-  timedRefresh(20000);
+  //timedRefresh(20000);
 
 };
