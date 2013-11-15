@@ -305,7 +305,7 @@ function redisplay(){
   };
 
   //should we remove answerable here?
-  controllerAnswerableSetup(); 
+  setTimeout(controllerAnswerableSetup(),200);
 };
 
 function viewToggleList() {
@@ -317,7 +317,9 @@ function viewToggleList() {
 
 
 function timedRefresh(timeoutPeriod) { 
+  var answerTO = timeoutPeriod + 2000;
   setTimeout(redisplay,timeoutPeriod);
+  setTimeout(controllerAnswerableSetup, answerTO);
 };
 
 window.onload = function(){
@@ -328,6 +330,6 @@ window.onload = function(){
 	viewAddDelegatedListeners();
   
   viewToggleList();
-  timedRefresh(30000);
+  //timedRefresh(30000);
 
 };
