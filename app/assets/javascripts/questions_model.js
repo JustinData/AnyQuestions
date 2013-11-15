@@ -284,13 +284,11 @@ function redisplay(){
 
     if(question.votes > 5){
       innerDiv.css("background", "red");
-    } else if ((question.votes > 3) || (question.votes < 5)) {
+    } else if ((question.votes > 3) && (question.votes < 5)) {
       innerDiv.css("background", "yellow");    
     } else if (question.votes <= 3) {
       innerDiv.css("background", "green");
     };
-
-    
 
     // build the upvote button & attach it to the inner div
     var upButton = $('<div class="upButton">&oplus;</div>');

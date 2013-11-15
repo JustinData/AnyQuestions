@@ -35,7 +35,6 @@ class Json::QuestionsController < ApplicationController
   def getanswerable
     @the_question = Question.find(params[:id])
     @user_id = session[:user_id]
-    
     if @the_question.user.id == @user_id
       render json: [{question: @the_question}]
     end
