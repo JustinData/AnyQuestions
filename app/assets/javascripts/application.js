@@ -15,7 +15,6 @@
 //= require underscore
 //= require packery
 //= require questions_model.js
-//= require wheelmenu 
 //= require animatedform
 
 
