@@ -1,7 +1,7 @@
 AnyQuestions
 ========
 
-######This project is a fork of a group project from the Fall 2013 class of General Assembly's Web Development Immersive.  The frontend is being completely redesigned while preserving the custom JavaScript MVC.###### 
+###### This project is a fork of a group project from the Fall 2013 class of General Assembly's Web Development Immersive.  The frontend is being completely redesigned while preserving the custom JavaScript MVC.
 [Original Project Repo](http://github.com/nicholalexander/project2)
 
 
