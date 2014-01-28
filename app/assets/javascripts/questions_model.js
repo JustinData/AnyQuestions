@@ -279,6 +279,9 @@ function controllerUpdateAnswer(serverResponse){
   viewRemoveQuestion(roomQuestionList.questions[index]);
 }
 
+
+//Appears to be added outside of MVC convention with duplication of functionality
+//TODO: Refactor this function to comply with convention, and facilitate with transitioning away from Packery
 function redisplay(){
   //delete this shit.
   elems = pckry.getItemElements();
@@ -295,6 +298,8 @@ function redisplay(){
   for( i=0; i<numberOfQuestions; i++){
     var question = roomQuestionList.questions[i];
 
+    //colors variable does not appear to be in use anywhere
+    //TODO: confirm it is not in use and delete
     var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
     var outerDiv = $('<div class="item">');
 
