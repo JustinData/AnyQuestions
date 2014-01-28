@@ -186,6 +186,7 @@ function controllerUpdateVotes(serverResponse){
   //Find the index of the question within the array
   var index = $.inArray(serverResponse[0].question.id, tempArray);
 
+
   //Update the Question object within the collection
   roomQuestionList.questions[index].votes = serverResponse[1].votes;
 
