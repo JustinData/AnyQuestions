@@ -75,7 +75,8 @@ function viewFormListener(){
 
 
 //If the question is answerable by the user, add this to the div.
-
+//
+//Currently there does not seem to be a check if a question is answerable
 function viewRenderAnswerable(question){
   var myDiv = $('div[data-val=' + question.id + ']');
   var answerableDiv = $("<div class=answerable>&radic;</div>");
@@ -106,13 +107,16 @@ function viewRenderQuestion(question){
   pckry.appended( outerDiv[0] );
 }
 
-//remove a question from the DOM (aka, it was answered)
+//remove a question from the DOM (call when answered)
 function viewRemoveQuestion(question){
   var myDiv = $('div[data-val=' + question.id + ']');
   myDiv.remove();
 }
 
-//display how many votes the question has
+//Display how many votes the question has
+//Takes a Question object as parameter
+//Pulls ID from object and uses the ID to grab the appropriate div in the DOM
+//Updates the vote count in the DOM
 function viewRenderVotes(question){
   // var myDiv = $('div[data-val=' + question.id + ']');
   // $(myDiv.children()[1]).html(question.votes);
@@ -131,7 +135,9 @@ function viewAddDelegatedListeners(){
 
 /********** CONTROLLER **********/
 
-//called to setup everything on a page refresh
+//Called on page load/refresh 
+//AJAX request to retrieve the currently unanswered questions
+//Sends result to the model builder
 function controllerSetup(){
   $.ajax({
     url: "/json/questions",
@@ -140,8 +146,10 @@ function controllerSetup(){
   });
 }
 
-//build the model from a list of unanswered questions returned from the server.
-//called only once with the page loads.
+//Build the models, called only once with the page loads.
+//Takes server response and iterates through all questions
+//For each question it instantiates a new Question object, adds the object to the collection, then renders the object to the DOM.
+//Then calls functions to setup voting and answerability for all questions.
 function controllerBuildModel(serverResponse){
   var numQuestions = serverResponse[0].questions.length;
 
@@ -154,9 +162,9 @@ function controllerBuildModel(serverResponse){
   controllerAnswerableSetup();
 }
 
-//setup the votes - 
-//for every question in the roomQuestionList
-//    ask the server how many votes the question has!
+//Gets the votes for every question in the roomQuestionList
+//AJAX request for each question to retrieve how many votes the question has
+//Sends results to update votes controller
 function controllerVoteSetup(){
   var numQuestions = roomQuestionList.questions.length;
   for (var i = 0; i < numQuestions; i++){
@@ -165,22 +173,30 @@ function controllerVoteSetup(){
     url: "/json/questions/" + roomQuestionList.questions[i].id + "/getvotes",
     type: "GET",
     data: { question: {id: roomQuestionList.questions[i].id}},
-            success:controllerUpdateVotes
+    success:controllerUpdateVotes
         });
     };
 }
 
-//update the votes - the success handler for the vote ajax request.
+//Update the votes - success handler for the vote ajax request.
 //when the votes are updated, sort the roomQuestionList, then render votes.
 function controllerUpdateVotes(serverResponse){
-  var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });
+  //Map collection to tempArray (potentially redundant)
+  var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });  
+  //Find the index of the question within the array
   var index = $.inArray(serverResponse[0].question.id, tempArray);
 
+  //Update the Question object within the collection
   roomQuestionList.questions[index].votes = serverResponse[1].votes;
+
+  //Sort collection
   roomQuestionList.sort();
+
+  //Render the votes to the question in the DOM
   viewRenderVotes(roomQuestionList.questions[index]);
   //redisplay();
 }
+
 
 //Takes the server response from posting a new question 
 //Instantiates a new Question object
