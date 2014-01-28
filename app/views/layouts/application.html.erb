@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Whoa</title>
+  <title>AnyQuestions</title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -9,11 +9,11 @@
 <body>
 <nav>
   <ul>
-<% if logged_in? %>
-  <li><%= link_to 'Logout', session_path, :method => :delete %></li>
-<% else %>
-  <li><%= link_to 'Login', new_user_path() + "/?a=login" %></li>
-<% end %> 
+	<% if logged_in? %>
+		<li><%= link_to 'Logout', session_path, :method => :delete %></li>
+	<% else %>
+		<li><%= link_to 'Login', new_user_path() + "/?a=login" %></li>
+	<% end %> 
 </ul>  
 </nav>
 <%= yield %>

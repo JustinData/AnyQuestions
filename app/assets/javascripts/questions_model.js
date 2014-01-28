@@ -14,16 +14,17 @@ function Question(q, uId, qId) {
 }
 
 //Question object methods
-
+//Upvote a question
 Question.prototype.upVote = function() {
   this.votes = this.votes + 1;
 };
 
+//Mark a question answer
 Question.prototype.answer = function() {
   this.answered = true;
 };
 
-// Question list object - this is an array of Question Objects
+// Question list object - this is a collection of Question Objects
 function QuestionList() {
   this.questions = [];
 }
@@ -48,7 +49,33 @@ QuestionList.prototype.addQuestion = function( qObj ) {
 /********************************/
 
 
-//if the question is answerable by the user, add this to the div.
+//Add a listener to the form to allow new questions to be created
+function viewFormListener(){
+  var form = $('.question-form');
+  var session_id = $('#session_id').text();
+  form.submit( function( event ) {
+    event.preventDefault();
+
+    //Get the question
+    var question = $('input.question').val(); 
+
+    //Clear input box now that we have input
+    $('input.question').val("");
+
+    //Create ajax request with the question and the user_id
+    //Sends the server return to controller to update the questions collection and render the question to the page.
+    $.ajax({
+      url: "/json/questions",
+      type: "POST",
+      data: { question: {details: question, user_id: session_id}},
+      success: controllerUpdateNewQuestion
+    });
+  });
+}
+
+
+//If the question is answerable by the user, add this to the div.
+
 function viewRenderAnswerable(question){
   var myDiv = $('div[data-val=' + question.id + ']');
   var answerableDiv = $("<div class=answerable>&radic;</div>");
@@ -93,28 +120,6 @@ function viewRenderVotes(question){
   $('div[data-val=' + question.id + '] .votesDiv')[0].html(question.votes);
 }
 
-//add a listener to the form to allow new questions to be created
-function viewFormListener(){
-  var form = $('.question-form');
-  var session_id = $('#session_id').text();
-  form.submit( function( event ) {
-    event.preventDefault();
-
-    //get the question
-    var question = $('input.question').val(); 
-
-    //clear input box now that we have input
-    $('input.question').val("");
-
-    //create ajax request with the question and the user_id
-    $.ajax({
-      url: "/json/questions",
-      type: "POST",
-      data: { question: {details: question, user_id: session_id}},
-      success: controllerUpdateNewQuestion
-    });
-  });
-}
 
 //using delegated listeners for all the little actions
 function viewAddDelegatedListeners(){
@@ -177,7 +182,13 @@ function controllerUpdateVotes(serverResponse){
   //redisplay();
 }
 
-//the hander that accepts the response from sending a new question.
+//Takes the server response from posting a new question 
+//Instantiates a new Question object
+//Then places that object in the Questions collection 
+//Next renders the question object to the page.
+//Finally renders the button to mark a question answered
+//
+//It appears the last part is being called because this function is only called on the server return when creating a new question.  Thus all questions rendered by this function will be answerable.  To re-use this function elsewhere please verify that the answerability of a question is being accounted for before it is automatically rendered to the DOM.
 function controllerUpdateNewQuestion(serverResponse){
   tempQuestion = new Question(serverResponse.details, serverResponse.user_id, serverResponse.id);
   roomQuestionList.addQuestion(tempQuestion);
