@@ -38,8 +38,27 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+group :development, :test do
+  gem 'jasmine-core', github: 'pivotal/jasmine'
+  gem 'jasmine', github: 'pivotal/jasmine-gem'
+  gem 'rspec-rails'
+  gem 'pry-rails'
+  gem 'factory_girl_rails'
+  gem "better_errors"
+  gem "binding_of_caller"
+end
+
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'launchy'
+  gem 'shoulda-matchers'
+  gem 'simplecov', :require => false 
+  gem 'nyan-cat-formatter'
+end
+
 # Use unicorn as the app server
-# gem 'unicorn'
+ gem 'puma'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
@@ -52,8 +71,3 @@ gem 'rails_12factor', group: :production
 
 gem 'foreigner'
 
-group :development do
-  gem 'pry-rails'
-	gem "better_errors"
-	gem "binding_of_caller"
-end

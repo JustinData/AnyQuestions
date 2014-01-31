@@ -1,37 +1,31 @@
-<!-- about Whoa. -->
+
 <div class="container">
-<h1 class="border">Whoa<span class="container"><span class="dot">+</span> Better questions, better answers.</h1>
+	<h1 class="border">AnyQuestions<span class="container"><span class="dot">+</span> Better questions, better answers.</h1>
 
-<h3>Whoa is a simple real-time classroom Q &amp; A tool that enables students to post and vote for questions.<br>Teachers can then identify questions to address on-the-spot, taking into account their popularity.
-</h3>
+	<h3>AnyQuestions is a simple real-time classroom Q &amp; A tool that enables students to post and vote for questions.<br>Teachers can then identify questions to address on-the-spot, taking into account their popularity.
+	</h3>
 </div>
-<!-- end of about Whoa! -->
 
-<div class="main">
-<a href="#wheel" class="wheel-button">
-  <span>+</span>
-</a>
- <div class="pointer">Hover me</div>
-<ul id="wheel" class="wheel" data-angle="all">
-  <li class="item"><%= link_to 'Home', root_path %></li>
-  <li class="item"><%= link_to 'Login', new_user_path() + "/?a=login" %></li>
-  <li class="item"><%= link_to 'Sign Up', new_user_path() + "/?a=signup" %></li>
-  <li class="item"><a href="https://twitter.com/theangrydom" target= "blank">Questions</a></li>
-  <li class="item"><%= link_to 'Sign Out', session_path, :method => :delete %></a></li>
-  <li class="item"><a href="https://twitter.com/theangrydom" target="blank">Documentation</a></li>
-</ul>
-</div>
-</div>
-<% if logged_in? %>
-<div class="btns">
-  <a class="reload btn" href="#">Sign In</a>
-<% end %>   
-<% if !logged_in? %>
-<div class="btns">
-<p><a class="btns" href="https://github.com/nicholalexander/project2" target="_blank">+ On GitHub</a>
-<% end %>
-</div>
+
+<!-- <div class="main">
+	<a href="#wheel" class="wheel-button">
+		<span>+</span>
+	</a>
+	<div class="pointer">Hover me</div>
+		<ul id="wheel" class="wheel" data-angle="all">
+			<li class="item"><%= link_to 'Home', root_path %></li>
+			<li class="item"><%= link_to 'Login', new_user_path() + "/?a=login" %></li>
+			<li class="item"><%= link_to 'Sign Up', new_user_path() + "/?a=signup" %></li>
+			<li class="item"><a href="https://twitter.com/theangrydom" target= "blank">Questions</a></li>
+			<li class="item"><%= link_to 'Sign Out', session_path, :method => :delete %></a></li>
+			<li class="item"><a href="https://twitter.com/theangrydom" target="blank">Documentation</a></li>
+		</ul>
+	</div>
+</div>  -->
+
+
+		
 <h1 class="border"></h1>
-<footer>
+<!-- <footer>
 <p class="back">By Team inJEANius [Justin,  Erica, Aby, Nichol] of the WDI September Array class.</p>
-</footer>
+</footer> -->

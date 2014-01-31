@@ -15,15 +15,15 @@
 //= require underscore
 //= require packery
 //= require questions_model.js
-//= require wheelmenu 
 //= require animatedform
 
+//TODO: Below code appears to only be related to the wheel menu which has been removed, should no issues arrise remove the code
 
-$(function(){
-  $(".wheel-button").wheelmenu({
-  trigger: "hover", // Can be "click" or "hover". Default: "click"
-  animation: "fly", // Entrance animation. Can be "fade" or "fly". Default: "fade"
-  animationSpeed: "fast", // Entrance animation speed. Can be "instant", "fast", "medium", or "slow". Default: "medium"
-  angle: "all" // Angle which the menu will appear. Can be "all", "N", "NE", "E", "SE", "S", "SW", "W", "NW", or even array [0, 360]. Default: "all" or [0, 360]
-});
-});
+// $(function(){
+//   $(".wheel-button").wheelmenu({
+//   trigger: "hover", // Can be "click" or "hover". Default: "click"
+//   animation: "fly", // Entrance animation. Can be "fade" or "fly". Default: "fade"
+//   animationSpeed: "fast", // Entrance animation speed. Can be "instant", "fast", "medium", or "slow". Default: "medium"
+//   angle: "all" // Angle which the menu will appear. Can be "all", "N", "NE", "E", "SE", "S", "SW", "W", "NW", or even array [0, 360]. Default: "all" or [0, 360]
+// });
+// });
