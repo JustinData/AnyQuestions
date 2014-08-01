@@ -31,11 +31,13 @@ function QuestionList() {
 
 //Question list methods
 QuestionList.prototype.sort = function() {
-  this.questions = _.sortBy(this.questions, function(element){return element.votes;});
+  this.questions = _.sortBy(this.questions, function(element) {
+    return element.votes;
+  });
 };
 
-QuestionList.prototype.addQuestion = function( qObj ) {
-  this.questions.push( qObj );
+QuestionList.prototype.addQuestion = function(qObj) {
+  this.questions.push(qObj);
   this.sort();
 };
 
@@ -50,24 +52,29 @@ QuestionList.prototype.addQuestion = function( qObj ) {
 
 
 //Add a listener to the form to allow new questions to be created
-function viewFormListener(){
+function viewFormListener() {
   var form = $('.question-form');
   var session_id = $('#session_id').text();
-  form.submit( function( event ) {
+  form.submit(function(event) {
     event.preventDefault();
 
     //Get the question
-    var question = $('input.question').val(); 
+    var question = $('input.question').val();
 
     //Clear input box now that we have input
-    $('input.question').val("");
+    $('input.question').val('');
 
     //Create ajax request with the question and the user_id
     //Sends the server return to controller to update the questions collection and render the question to the page.
     $.ajax({
-      url: "/json/questions",
-      type: "POST",
-      data: { question: {details: question, user_id: session_id}},
+      url: '/json/questions',
+      type: 'POST',
+      data: {
+        question: {
+          details: question,
+          user_id: session_id
+        }
+      },
       success: controllerUpdateNewQuestion
     });
   });
@@ -77,38 +84,38 @@ function viewFormListener(){
 //If the question is answerable by the user, add this to the div.
 //
 //Currently there does not seem to be a check if a question is answerable
-function viewRenderAnswerable(question){
+function viewRenderAnswerable(question) {
   var myDiv = $('div[data-val=' + question.id + ']');
-  var answerableDiv = $("<div class=answerable>&radic;</div>");
+  var answerableDiv = $('<div class=answerable>&radic;</div>');
 
   $(myDiv.children()[1]).append(answerableDiv);
 }
 
 //render a question
-function viewRenderQuestion(question){
-  var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
+function viewRenderQuestion(question) {
+  var colors = ['purple', 'orange', 'red', 'blue', 'yellow', 'green'];
   var outerDiv = $('<div class="item">');
 
-  var innerDiv = $("<div class='item-content' data-val=" + question.id + ">");
+  var innerDiv = $('<div class="item-content" data-val=' + question.id + '>');
   innerDiv.text(question.details);
-  innerDiv.css("background", _.sample(colors));
+  innerDiv.css('background', _.sample(colors));
 
   // build the upvote button & attach it to the inner div
   var upButton = $('<div class="upButton">&oplus;</div>');
   innerDiv.append(upButton);
 
   //build the votes div
-  var votesDiv = $("<div class=votesDiv>0</div>");
+  var votesDiv = $('<div class=votesDiv>0</div>');
   innerDiv.append(votesDiv);
 
   //append the div with the new question.
   outerDiv.append(innerDiv);
   $('div.packery').append(outerDiv);
-  pckry.appended( outerDiv[0] );
+  pckry.appended(outerDiv[0]);
 }
 
 //remove a question from the DOM (call when answered)
-function viewRemoveQuestion(question){
+function viewRemoveQuestion(question) {
   var myDiv = $('div[data-val=' + question.id + ']');
   myDiv.remove();
 }
@@ -117,7 +124,7 @@ function viewRemoveQuestion(question){
 //Takes a Question object as parameter
 //Pulls ID from object and uses the ID to grab the appropriate div in the DOM
 //Updates the vote count in the DOM
-function viewRenderVotes(question){
+function viewRenderVotes(question) {
   // var myDiv = $('div[data-val=' + question.id + ']');
   // $(myDiv.children()[1]).html(question.votes);
   // More precise selection of votes div.
@@ -126,7 +133,7 @@ function viewRenderVotes(question){
 
 
 //using delegated listeners for all the little actions
-function viewAddDelegatedListeners(){
+function viewAddDelegatedListeners() {
   $('div.packery').on('click', 'div.upButton', controllerUpVote);
   $('div.packery').on('click', 'div.answerable', controllerAnswer);
 }
@@ -138,10 +145,10 @@ function viewAddDelegatedListeners(){
 //Called on page load/refresh 
 //AJAX request to retrieve the currently unanswered questions
 //Sends result to the model builder
-function controllerSetup(){
+function controllerSetup() {
   $.ajax({
-    url: "/json/questions",
-    type: "GET",
+    url: '/json/questions',
+    type: 'GET',
     success: controllerBuildModel
   });
 }
@@ -150,10 +157,10 @@ function controllerSetup(){
 //Takes server response and iterates through all questions
 //For each question it instantiates a new Question object, adds the object to the collection, then renders the object to the DOM.
 //Then calls functions to setup voting and answerability for all questions.
-function controllerBuildModel(serverResponse){
+function controllerBuildModel(serverResponse) {
   var numQuestions = serverResponse[0].questions.length;
 
-  for (var i = 0; i < numQuestions; i++){
+  for (var i = 0; i < numQuestions; i++) {
     var tempQuestion = new Question(serverResponse[0].questions[i].details, serverResponse[0].questions[i].user_id, serverResponse[0].questions[i].id);
     roomQuestionList.addQuestion(tempQuestion);
     viewRenderQuestion(tempQuestion);
@@ -165,24 +172,30 @@ function controllerBuildModel(serverResponse){
 //Gets the votes for every question in the roomQuestionList
 //AJAX request for each question to retrieve how many votes the question has
 //Sends results to update votes controller
-function controllerVoteSetup(){
+function controllerVoteSetup() {
   var numQuestions = roomQuestionList.questions.length;
-  for (var i = 0; i < numQuestions; i++){
+  for (var i = 0; i < numQuestions; i++) {
 
     $.ajax({
-    url: "/json/questions/" + roomQuestionList.questions[i].id + "/getvotes",
-    type: "GET",
-    data: { question: {id: roomQuestionList.questions[i].id}},
-    success:controllerUpdateVotes
-        });
-    };
+      url: '/json/questions/' + roomQuestionList.questions[i].id + '/getvotes',
+      type: 'GET',
+      data: {
+        question: {
+          id: roomQuestionList.questions[i].id
+        }
+      },
+      success: controllerUpdateVotes
+    });
+  }
 }
 
 //Update the votes - success handler for the vote ajax request.
 //when the votes are updated, sort the roomQuestionList, then render votes.
-function controllerUpdateVotes(serverResponse){
+function controllerUpdateVotes(serverResponse) {
   //Map collection to tempArray (potentially redundant)
-  var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });  
+  var tempArray = $.map(roomQuestionList.questions, function(question, i) {
+    return question.id;
+  });
   //Find the index of the question within the array
   var index = $.inArray(serverResponse[0].question.id, tempArray);
 
@@ -206,72 +219,88 @@ function controllerUpdateVotes(serverResponse){
 //Finally renders the button to mark a question answered
 //
 //It appears the last part is being called because this function is only called on the server return when creating a new question.  Thus all questions rendered by this function will be answerable.  To re-use this function elsewhere please verify that the answerability of a question is being accounted for before it is automatically rendered to the DOM.
-function controllerUpdateNewQuestion(serverResponse){
-  tempQuestion = new Question(serverResponse.details, serverResponse.user_id, serverResponse.id);
+function controllerUpdateNewQuestion(serverResponse) {
+  var tempQuestion = new Question(serverResponse.details, serverResponse.user_id, serverResponse.id);
   roomQuestionList.addQuestion(tempQuestion);
   viewRenderQuestion(tempQuestion);
   viewRenderAnswerable(tempQuestion);
 }
 
 //launch an ajax request to the server to upvote a question
-function controllerUpVote(){
+function controllerUpVote() {
   var session_id = $('#session_id').text();
   var question_id = $(this.parentElement).data().val;
-  var url = "/json/questions/" + question_id + "/vote_up";
+  var url = '/json/questions/' + question_id + '/vote_up';
 
   $.ajax({
-      url: url,
-      type: "POST",
-      data: { question: {id: question_id}},
-      success: controllerUpdateVotes
-    });
+    url: url,
+    type: 'POST',
+    data: {
+      question: {
+        id: question_id
+      }
+    },
+    success: controllerUpdateVotes
+  });
 }
 
 //ajax request for each question - can the user who is logged in answer it?
-function controllerAnswerableSetup(){
+function controllerAnswerableSetup() {
   var numQuestions = roomQuestionList.questions.length;
-  for (var i = 0; i < numQuestions; i++){
+  for (var i = 0; i < numQuestions; i++) {
 
     $.ajax({
-    url: "/json/questions/" + roomQuestionList.questions[i].id + "/getanswerable",
-    type: "GET",
-    data: { question: {id: roomQuestionList.questions[i].id}},
+      url: '/json/questions/' + roomQuestionList.questions[i].id + '/getanswerable',
+      type: 'GET',
+      data: {
+        question: {
+          id: roomQuestionList.questions[i].id
+        }
+      },
       success: controllerUpdateAnswerable
-      });
+    });
   }
 }
 
 //the server has decided i can answer this - so render an answer button.
-function controllerUpdateAnswerable(serverResponse){
+function controllerUpdateAnswerable(serverResponse) {
   //TODO: dry this up into a helper function aka controllerHelperMap(serverResponse)
-  var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });
+  var tempArray = $.map(roomQuestionList.questions, function(question, i) {
+    return question.id;
+  });
   var index = $.inArray(serverResponse[0].question.id, tempArray);
 
   viewRenderAnswerable(roomQuestionList.questions[index]);
 }
 
 //when the user clicks on answer, send an ajax request to server.
-function controllerAnswer(){
-  console.log("this question was just answered!");
+function controllerAnswer() {
+  console.log('this question was just answered!');
   // now go tell the server this question was answered!
   // TODO - this is one level higher than vote because of the nesting
   // that is happening - it shouldn't be.
   var question_id = $(this.parentElement.parentElement).data().val;
 
-  var url = "/json/questions/" + question_id + "/answered";
+  var url = '/json/questions/' + question_id + '/answered';
 
   $.ajax({
-      url: url,
-      type: "POST",
-      data: { question: {id: question_id}},
-      success: controllerUpdateAnswer
-    });
+    url: url,
+    type: 'POST',
+    data: {
+      question: {
+        id: question_id
+      }
+    },
+    success: controllerUpdateAnswer
+  });
 }
 
 //when the server comes back, update the model and display
-function controllerUpdateAnswer(serverResponse){
+function controllerUpdateAnswer(serverResponse) {
   //remove from the model - find it in the model.  then mark it answered
-  var tempArray = $.map(roomQuestionList.questions, function(question, i) { return question.id });
+  var tempArray = $.map(roomQuestionList.questions, function(question, i) {
+    return question.id;
+  });
   var index = $.inArray(serverResponse[0].question.id, tempArray);
   roomQuestionList.questions[index].answer();
 
@@ -282,10 +311,10 @@ function controllerUpdateAnswer(serverResponse){
 
 //Appears to be added outside of MVC convention with duplication of functionality
 //TODO: Refactor this function to comply with convention, and facilitate with transitioning away from Packery
-function redisplay(){
+function redisplay() {
   //delete this shit.
   elems = pckry.getItemElements();
-  for (var i=0; i<elems.length; i++){
+  for (var i = 0; i < elems.length; i++) {
     pckry.remove(elems[i]);
   }
 
@@ -295,23 +324,23 @@ function redisplay(){
 
   //build this shit.
   numberOfQuestions = roomQuestionList.questions.length;
-  for( i=0; i<numberOfQuestions; i++){
+  for (i = 0; i < numberOfQuestions; i++) {
     var question = roomQuestionList.questions[i];
 
     //colors variable does not appear to be in use anywhere
     //TODO: confirm it is not in use and delete
-    var colors = ["purple", "orange", "red", "blue", "yellow", "green"];
+    var colors = ['purple', 'orange', 'red', 'blue', 'yellow', 'green'];
     var outerDiv = $('<div class="item">');
 
-    var innerDiv = $("<div class='item-content' data-val=" + question.id + ">");
+    var innerDiv = $('<div class="item-content" data-val=' + question.id + '>');
     innerDiv.text(question.details);
 
     if (question.votes >= 5) {
-      innerDiv.css("background", "red");
+      innerDiv.css('background', 'red');
     } else if ((question.votes >= 3) && (question.votes < 5)) {
-      innerDiv.css("background", "yellow");    
+      innerDiv.css('background', 'yellow');
     } else if (question.votes < 2) {
-      innerDiv.css("background", "green");
+      innerDiv.css('background', 'green');
     }
 
     // build the upvote button & attach it to the inner div
@@ -319,14 +348,14 @@ function redisplay(){
     innerDiv.append(upButton);
 
     //build the votes div
-    var votesDiv = $("<div class=votesDiv>"+question.votes+"</div>");
+    var votesDiv = $('<div class=votesDiv>' + question.votes + '</div>');
     innerDiv.append(votesDiv);
 
     //append the div with the new question.
     outerDiv.append(innerDiv);
 
     $('div.packery').append(outerDiv);
-    pckry.prepended( outerDiv );
+    pckry.prepended(outerDiv);
   }
 
   //should we remove answerable here?
@@ -335,8 +364,8 @@ function redisplay(){
 
 
 function viewToggleList() {
-  $("p").hide();
-  $("h1").click(function() {
+  $('p').hide();
+  $('h1').click(function() {
     $(this).next().slideToggle(300);
   });
 }
@@ -347,13 +376,13 @@ function timedRefresh(timeoutPeriod) {
   setTimeout(controllerAnswerableSetup, answerTO);
 }
 
-window.onload = function(){
-  
+window.onload = function() {
+
   controllerSetup();
-  
+
   viewFormListener();
   viewAddDelegatedListeners();
-  
+
   viewToggleList();
   timedRefresh(5000);
 
